@@ -9,8 +9,7 @@ import uuid
 from xclasses import *
 import cyrtranslit
 from metaphone import doublemetaphone
-#install('multiprocessing')
-from multiprocess import cpu_count
+import urllib
 
 def main():
     """who = 'МФО'
@@ -24,8 +23,7 @@ def main():
     
     """for lon in ['5/003-2006']:
         ost2graf(conn,lon,'INTRST_OVRD',True)"""
-    
-    print(cpu_count())
+    print(uqt('"Товарищество с ограниченной ответственностью ""Ишим-Астык"""','"'))
     
 if __name__ == '__main__':
     main()

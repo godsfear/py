@@ -165,6 +165,9 @@
 							"code": "J_NAME",
 							"value": ""
 						}, {
+							"code": "J_SHORT_NAME",
+							"value": ""
+						}, {
 							"code": "REG_CERT_NO",
 							"value": ""
 						}, {

@@ -6,6 +6,9 @@ import csv
 from decimal import Decimal
 import progressbar
 
+def uqt(str,chr):
+    return str[:1].replace(chr,'') + str[1:-1].replace('""','"') + str[-1:].replace(chr,'') if str[:1] == str[-1:] else str
+
 def add2date(idate,years=0,months=0,days=0):
     day = idate.day - 1 + days
     year = idate.year + years
@@ -237,7 +240,7 @@ def insert(conn,tab,fld,val):
     except (Exception,RuntimeError) as error:
         print(error)
 
-def txt2dict(fname,maps,dates,dateformat,decimals,bools,skip,quotechar,delimiter):
+def txt2dict(fname,maps,dates,dateformat,decimals,bools,skip,unquot,quotechar,delimiter):
     if fname == '':
         return []
     objects = []
@@ -274,6 +277,8 @@ def txt2dict(fname,maps,dates,dateformat,decimals,bools,skip,quotechar,delimiter
                             val = str2bool(val)
                         elif cod in decimals:
                             val = str2dec(val)
+                        elif cod in unquot:
+                            val = uqt(val,'"')
                         obj.update({cod:val})
                     objects.append(obj)
                     bar.update(k)
@@ -303,15 +308,15 @@ def cbs_fill(template,data,dateformat):
                 else:
                     if not (field in ['code','value','values','rows','rowId']):
                         if field in data.keys():
-                            template[field] = _str(data[field],dateformat)
+                            template[field] = x_str(data[field],dateformat)
                     else:
                         if field == 'code':
                             if any(k in template.keys() for k in ('values','value','rowId','rows')):
                                 if template[field] in data.keys():
                                     if 'value' in template.keys():
-                                        template['value'] = _str(data[template[field]],dateformat)
+                                        template['value'] = x_str(data[template[field]],dateformat)
                                     elif 'rowId' in template.keys():
-                                        template['rowId'] = _str(data[template[field]],dateformat)
+                                        template['rowId'] = x_str(data[template[field]],dateformat)
                             else:
                                 template[field] = data[field]
 
