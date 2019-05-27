@@ -1,0 +1,289 @@
+{
+	"branchCode": "",
+	"customerType": "",
+	"groups": [{
+			"code": "ANKETA",
+			"values": [{
+					"code": "FULL_NAME_KZ",
+					"value": ""
+				}, {
+					"code": "J_NAME",
+					"value": ""
+				}, {
+					"code": "REG_CERT_NO",
+					"value": ""
+				}, {
+					"code": "REG_CERT_SERIE",
+					"value": ""
+				}, {
+					"code": "REG_CERT_DATE",
+					"value": ""
+				}, {
+					"code": "KBE",
+					"value": ""
+				}, {
+					"code": "STATE_ORG",
+					"value": ""
+				}, {
+					"code": "KT",
+					"value": ""
+				}, {
+					"code": "BIRTH",
+					"value": ""
+				}, {
+					"code": "LNAME",
+					"value": ""
+				}, {
+					"code": "FNAME",
+					"value": ""
+				}, {
+					"code": "MNAME",
+					"value": ""
+				}, {
+					"code": "IDN",
+					"value": ""
+				}, {
+					"code": "RES_COUNTRY",
+					"rowId": ""
+				}, {
+					"code": "OKED",
+					"value": ""
+				}, {
+					"code": "GENDER",
+					"rowId": ""
+				}, {
+					"code": "LANGUAGE",
+					"rowId": ""
+				}, {
+					"code": "RESIDENT",
+					"value": ""
+				}, {
+					"code": "LINKED_CUSTOMER",
+					"value": ""
+				}, {
+					"code": "IDN_AS_LINKED_CUS",
+					"value": ""
+				}, {
+					"code": "EXT_ID",
+					"value": ""
+				}, {
+					"code": "NOK",
+					"value": ""
+				}
+			]
+		}, {
+			"code": "PASSPORT_DETAILS",
+			"values": [{
+					"code": "DOC_NO_PASS",
+					"value": ""
+				}, {
+					"code": "ISSUED_BY_PASS",
+					"value": ""
+				}, {
+					"code": "ISSUE_DATE_PASS",
+					"value": ""
+				}, {
+					"code": "EXPIRY_PASS",
+					"value": ""
+				}, {
+					"code": "ID_DOC",
+					"rowId": ""
+				}
+			]
+		}, {
+			"code": "CONTACT_PERSON",
+			"rows": [{
+					"values": [{
+							"code": "POSITION_RU_CONTACT",
+							"value": ""
+						}, {
+							"code": "BASIS_NO_CONTACT",
+							"value": ""
+						}, {
+							"code": "BASIS_DATE_CONTACT",
+							"value": ""
+						}, {
+							"code": "BASIS_EXPIRY_CONTACT",
+							"value": ""
+						}, {
+							"code": "DESCRIPTION_CONTACT",
+							"value": ""
+						}, {
+							"code": "CONTACT_CLIENT",
+							"value": ""
+						}
+					]
+				}
+			]
+		}, {
+			"code": "BANK_DETAILS",
+			"rows": [{
+					"values": [{
+							"code": "DESC_BANKDETS",
+							"value": ""
+						}, {
+							"code": "ACC_NO_BANKDETS",
+							"value": ""
+						}, {
+							"code": "OPEN_DATE_BANKDETS",
+							"value": ""
+						}, {
+							"code": "CLOSE_DATE_BANKDETS",
+							"value": ""
+						}
+					]
+				}
+			]
+		}, {
+			"code": "MANAGER",
+			"values": [{
+					"code": "MANAGER_CLIENT",
+					"value": ""
+				}, {
+					"code": "DOC_NO_MAN",
+					"value": ""
+				}, {
+					"code": "DOC_DATE_MAN",
+					"value": ""
+				}, {
+					"code": "EXP_DATE_MAN",
+					"value": ""
+				}, {
+					"code": "MANAGER_POSITION",
+					"value": ""
+				}
+			]
+		}, {
+			"code": "EMAIL",
+			"rows": [{
+					"values": [{
+							"code": "EMAIL_CONTACT",
+							"value": ""
+						}
+					]
+				}
+			]
+		}, {
+			"code": "TELEPHONE",
+			"rows": [{
+					"values": [{
+							"code": "MOBILE_CONTACT",
+							"value": ""
+						}
+					]
+				}
+			]
+		}, {
+			"code": "ADDRESS",
+			"rows": [{
+					"values": [{
+							"code": "INHAB_AREA_LEGAL",
+							"value": ""
+						}, {
+							"code": "STREET_LEGAL",
+							"value": ""
+						}, {
+							"code": "NUMBER_LEGAL",
+							"value": ""
+						}, {
+							"code": "CORPS_LEGAL",
+							"value": ""
+						}, {
+							"code": "COUNTRY_LEGAL",
+							"rowId": ""
+						}, {
+							"code": "KATO_CODE",
+							"value": ""
+						}, {
+							"code": "DISTRICT",
+							"value": ""
+						}
+					]
+				}
+			]
+		}, {
+			"code": "KT_CARD",
+			"values": [{
+					"code": "KT_MEMBER",
+					"value": ""
+				}, {
+					"code": "MEMBERSHIP_DATE",
+					"value": ""
+				}, {
+					"code": "SHARE_AMT",
+					"value": ""
+				}, {
+					"code": "LENDING_LIMIT",
+					"value": ""
+				}, {
+					"code": "MEMBERSHIP_END_DATE",
+					"value": ""
+				}
+			]
+		}, {
+			"code": "EMPLOYEES",
+			"rows": [{
+					"values": [{
+							"code": "EMPLOYEES_QTY",
+							"value": ""
+						}
+					]
+				}
+			]
+		}, {
+			"code": "LANDS",
+			"rows": [{
+					"values": [{
+							"code": "LAND_SQUARE",
+							"value": ""
+						}, {
+							"code": "LEASED_UNTIL",
+							"value": ""
+						}
+					]
+				}
+			]
+		}, {
+			"code": "DATA_EXPORT_CUS",
+			"values": [{
+					"code": "PCB_COMPANY_STATUS",
+					"rowId": ""
+				}
+			]
+		}, {
+			"code": "BIZ_TYPE",
+			"rows": [{
+					"values": []
+				}
+			]
+		}, {
+			"code": "DOCS",
+			"rows": [{
+					"values": [{
+							"code": "DOC_NAME",
+							"value": ""
+						}, {
+							"code": "DOC_NO",
+							"value": ""
+						}, {
+							"code": "DOC_DATE",
+							"value": ""
+						}, {
+							"code": "DOC_SHEETS_QTY",
+							"value": ""
+						}, {
+							"code": "DOC_REG_DATE",
+							"value": ""
+						}, {
+							"code": "DOC_SCAN",
+							"value": ""
+						}, {
+							"code": "DOC_ID",
+							"value": ""
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>КОНВЕРТАЦИЯ</h1>
+
+<p>Добро пожаловать в <em>КОНВЕРТАЦИЯ КРЕДИТНОГО ДОГОВОРА</em></p>
+
+<h2>ВВОД ДАННЫХ:</h2>
+<!---<form>
+	<input id='loan' name='loan' type='text' placeholder='Номер договора' autofocus required />
+	<input id='rate' name='rate' type='text' placeholder='Курс конвертации' required pattern='[0-9.]+'/>
+	<input type="submit" value="Отправить информацию" formnovalidate>
+</form>--->
+<form action="/convert/" method="post">
+    {% csrf_token %}
+	<table>
+    {{ form.as_table }}
+	</table>
+    <input type="submit" value="КОНВЕРТИРОВАТЬ!">
+</form>
+
+{% endblock %}

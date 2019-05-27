@@ -1,0 +1,828 @@
+{
+	"CLIENT": {
+		"GROUPS": {
+			"ADDRESS": [{
+					"values": [{
+							"code": "INHAB_AREA_LEGAL",
+							"value": ""
+						}, {
+							"code": "STREET_LEGAL",
+							"value": ""
+						}, {
+							"code": "NUMBER_LEGAL",
+							"value": ""
+						}, {
+							"code": "CORPS_LEGAL",
+							"value": ""
+						}, {
+							"code": "COUNTRY_LEGAL",
+							"rowId": ""
+						}, {
+							"code": "KATO_CODE",
+							"value": ""
+						}, {
+							"code": "DISTRICT",
+							"value": ""
+						}, {
+							"code": "ADD_FULL",
+							"value": ""
+						}, {
+							"code": "ADD_TYPE",
+							"rowId": ""
+						}
+					]
+				}
+			],
+			"BANK_DETAILS": [{
+					"values": [{
+							"code": "DESC_BANKDETS",
+							"value": ""
+						}, {
+							"code": "ACC_NO_BANKDETS",
+							"value": ""
+						}, {
+							"code": "OPEN_DATE_BANKDETS",
+							"value": ""
+						}, {
+							"code": "CLOSE_DATE_BANKDETS",
+							"value": ""
+						}
+					]
+				}
+			],
+			"BIZ_TYPE": [{
+					"values": [""]
+				}
+			],
+			"CONTACT_PERSON": [{
+					"values": [{
+							"code": "POSITION_RU_CONTACT",
+							"value": ""
+						}, {
+							"code": "BASIS_NO_CONTACT",
+							"value": ""
+						}, {
+							"code": "BASIS_DATE_CONTACT",
+							"value": ""
+						}, {
+							"code": "BASIS_EXPIRY_CONTACT",
+							"value": ""
+						}, {
+							"code": "DESCRIPTION_CONTACT",
+							"value": ""
+						}, {
+							"code": "CONTACT_CLIENT",
+							"value": ""
+						}
+					]
+				}
+			],
+			"DOCS": [{
+					"values": [{
+							"code": "DOC_NAME",
+							"value": ""
+						}, {
+							"code": "DOC_NO",
+							"value": ""
+						}, {
+							"code": "DOC_DATE",
+							"value": ""
+						}, {
+							"code": "DOC_SHEETS_QTY",
+							"value": ""
+						}, {
+							"code": "DOC_REG_DATE",
+							"value": ""
+						}, {
+							"code": "DOC_SCAN",
+							"value": ""
+						}, {
+							"code": "DOC_ID",
+							"value": ""
+						}
+					]
+				}
+			],
+			"EMAIL": [{
+					"values": [{
+							"code": "EMAIL_CONTACT",
+							"value": ""
+						}
+					]
+				}
+			],
+			"EMPLOYEES": [{
+					"values": [{
+							"code": "EMPLOYEES_QTY",
+							"value": ""
+						}
+					]
+				}
+			],
+			"LANDS": [{
+					"values": [{
+							"code": "LAND_SQUARE",
+							"value": ""
+						}, {
+							"code": "LEASED_UNTIL",
+							"value": ""
+						}
+					]
+				}
+			],
+			"TELEPHONE": [{
+					"values": [{
+							"code": "MOBILE_CONTACT",
+							"value": ""
+						}, {
+							"code": "PHONE_TYPE",
+							"rowId": ""
+						}
+					]
+				}
+			],
+			"PORTFOLIO": [{
+					"values": [{
+							"code": "EXT_CODE",
+							"value": ""
+						}, {
+							"code": "PORTFOLIO_CODE",
+							"rowId": ""
+						}
+					]
+				}
+			]
+		},
+		"MAIN": {
+			"branchCode": "",
+			"customerType": "",
+			"groups": [{
+					"code": "ANKETA",
+					"values": [{
+							"code": "FULL_NAME_KZ",
+							"value": ""
+						}, {
+							"code": "J_NAME",
+							"value": ""
+						}, {
+							"code": "REG_CERT_NO",
+							"value": ""
+						}, {
+							"code": "REG_CERT_SERIE",
+							"value": ""
+						}, {
+							"code": "REG_CERT_DATE",
+							"value": ""
+						}, {
+							"code": "KBE",
+							"value": ""
+						}, {
+							"code": "STATE_ORG",
+							"value": ""
+						}, {
+							"code": "KT",
+							"value": ""
+						}, {
+							"code": "BIRTH",
+							"value": ""
+						}, {
+							"code": "LNAME",
+							"value": ""
+						}, {
+							"code": "FNAME",
+							"value": ""
+						}, {
+							"code": "MNAME",
+							"value": ""
+						}, {
+							"code": "IDN",
+							"value": ""
+						}, {
+							"code": "RES_COUNTRY",
+							"rowId": ""
+						}, {
+							"code": "OKED",
+							"value": ""
+						}, {
+							"code": "GENDER",
+							"rowId": ""
+						}, {
+							"code": "LANGUAGE",
+							"rowId": ""
+						}, {
+							"code": "RESIDENT",
+							"value": ""
+						}, {
+							"code": "LINKED_CUSTOMER",
+							"value": ""
+						}, {
+							"code": "IDN_AS_LINKED_CUS",
+							"value": ""
+						}, {
+							"code": "EXT_ID",
+							"value": ""
+						}, {
+							"code": "NOK",
+							"value": ""
+						}
+					]
+				}, {
+					"code": "PASSPORT_DETAILS",
+					"values": [{
+							"code": "DOC_NO_PASS",
+							"value": ""
+						}, {
+							"code": "ISSUED_BY_PASS",
+							"value": ""
+						}, {
+							"code": "ISSUE_DATE_PASS",
+							"value": ""
+						}, {
+							"code": "EXPIRY_PASS",
+							"value": ""
+						}, {
+							"code": "ID_DOC",
+							"rowId": ""
+						}
+					]
+				}, {
+					"code": "MANAGER",
+					"values": [{
+							"code": "MANAGER_CLIENT",
+							"value": ""
+						}, {
+							"code": "DOC_NO_MAN",
+							"value": ""
+						}, {
+							"code": "DOC_DATE_MAN",
+							"value": ""
+						}, {
+							"code": "EXP_DATE_MAN",
+							"value": ""
+						}, {
+							"code": "MANAGER_POSITION",
+							"value": ""
+						}
+					]
+				}, {
+					"code": "KT_CARD",
+					"values": [{
+							"code": "KT_MEMBER",
+							"value": ""
+						}, {
+							"code": "MEMBERSHIP_DATE",
+							"value": ""
+						}, {
+							"code": "SHARE_AMT",
+							"value": ""
+						}, {
+							"code": "LENDING_LIMIT",
+							"value": ""
+						}, {
+							"code": "MEMBERSHIP_END_DATE",
+							"value": ""
+						}
+					]
+				}, {
+					"code": "DATA_EXPORT_CUS",
+					"values": [{
+							"code": "PCB_COMPANY_STATUS",
+							"rowId": ""
+						}
+					]
+				}
+			]
+		}
+	},
+	"PLEDGE": {
+		"AGREEMENT": {
+			"agreementNumbers": [""],
+			"amount": "",
+			"branchCode": "",
+			"currency": "",
+			"dateStart": "",
+			"groups": [{
+					"code": "LOAN_CONDITION",
+					"values": [{
+							"code": "COLL_AG_TYPE",
+							"rowId": ""
+						}
+					]
+				}, {
+					"code": "DATA_EXPORT",
+					"values": [{
+							"code": "PCB_COLL_TYPE",
+							"rowId": ""
+						}
+					]
+				}
+			],
+			"pawnObjectId": "",
+			"period": "",
+			"periodUnit": ""
+		},
+		"OBJECT": {
+			"GROUPS": {
+				"BIO_ADDITIONAL": [{
+						"values": [{
+								"code": "BROOD_BIO",
+								"value": ""
+							}, {
+								"code": "EAR_TAG_BIO",
+								"value": ""
+							}, {
+								"code": "BIRTH_DATE_BIO",
+								"value": ""
+							}, {
+								"code": "EL_TAG_BIO",
+								"value": ""
+							}, {
+								"code": "LABEL_BIO",
+								"value": ""
+							}, {
+								"code": "REGIS_NO_BIO",
+								"value": ""
+							}, {
+								"code": "ID_NO_BIO",
+								"value": ""
+							}, {
+								"code": "NAME_BIO",
+								"value": ""
+							}, {
+								"code": "QTY_BIO",
+								"value": ""
+							}
+						]
+					}
+				],
+				"COLL_DOCS": [{
+						"values": [{
+								"code": "COLL_DOCS",
+								"value": ""
+							}, {
+								"code": "COLL_DOC_NO",
+								"value": ""
+							}, {
+								"code": "COLL_DOC_DATE",
+								"value": ""
+							}, {
+								"code": "COL_DOC_SHEETS_QTY",
+								"value": ""
+							}, {
+								"code": "COLL_DOC_REG_DATE",
+								"value": ""
+							}
+						]
+					}
+				],
+				"COLL_EST": [{
+						"values": [{
+								"code": "EST_DOC_NO",
+								"value": ""
+							}, {
+								"code": "EST_DOC_DATE",
+								"value": ""
+							}, {
+								"code": "COLL_LIQ_COE",
+								"value": ""
+							}, {
+								"code": "COLL_NOK_COST",
+								"value": "0"
+							}, {
+								"code": "COLL_PAWN_COST",
+								"value": "0"
+							}, {
+								"code": "COLL_EXPERT_COST",
+								"value": "0"
+							}, {
+								"code": "NOK_EST_DOC_NO",
+								"value": ""
+							}, {
+								"code": "NOK_EST_DOC_DATE",
+								"value": ""
+							}, {
+								"code": "NOK_NAME",
+								"value": ""
+							}
+						]
+					}
+				],
+				"EQUIP_ADDITIONAL": [{
+						"values": [{
+								"code": "SERIAL_NO_EQUIP",
+								"value": ""
+							}, {
+								"code": "NAME_EQUIP",
+								"value": ""
+							}, {
+								"code": "PROD_YR_EQUIP",
+								"value": ""
+							}, {
+								"code": "QTY_EQUIP",
+								"value": ""
+							}
+						]
+					}
+				],
+				"GRAIN_ADDITIONAL": [{
+						"values": [{
+								"code": "MSHA_COLL",
+								"value": ""
+							}, {
+								"code": "HPP_ADDR_COLL",
+								"value": ""
+							}, {
+								"code": "RECEIPT_COLL",
+								"value": ""
+							}, {
+								"code": "HARVEST_YR_COLL",
+								"value": ""
+							}, {
+								"code": "RECEIPT_DATE_COLL",
+								"value": ""
+							}, {
+								"code": "HPP_NAME_COLL",
+								"value": ""
+							}, {
+								"code": "KEPP_AG_NO_COLL",
+								"value": ""
+							}, {
+								"code": "KEEP_AG_DATE_COLL",
+								"value": ""
+							}, {
+								"code": "HPP_LIC_COLL",
+								"value": ""
+							}, {
+								"code": "HPP_LIC_DATE_COLL",
+								"value": ""
+							}, {
+								"code": "DESC_GRAIN",
+								"value": ""
+							}
+						]
+					}
+				],
+				"LAND_ADDITIONAL": [{
+						"values": [{
+								"code": "KADASTR_LAND",
+								"value": ""
+							}, {
+								"code": "LAND_SQ_LAND",
+								"value": ""
+							}
+						]
+					}
+				],
+				"LIVE_EQUIP_ADDITIONAL": [{
+						"values": [{
+								"code": "NAME_LIVE",
+								"value": ""
+							}, {
+								"code": "NAMEKZ_LIVE",
+								"value": ""
+							}, {
+								"code": "QTY_LIVE",
+								"value": ""
+							}, {
+								"code": "SERIAL_NO_LIVE",
+								"value": ""
+							}, {
+								"code": "PROD_YR_LIVE",
+								"value": ""
+							}
+						]
+					}
+				],
+				"PROPERTY_ADDITIONAL": [{
+						"values": [{
+								"code": "IN_NAMERU_COLL",
+								"value": ""
+							}, {
+								"code": "IN_NAMEKZ_COLL",
+								"value": ""
+							}, {
+								"code": "SHORT_DESC_SMR",
+								"value": ""
+							}, {
+								"code": "SHORT_DESCKZ_SMR",
+								"value": ""
+							}, {
+								"code": "ADDRESS_SMR",
+								"value": ""
+							}, {
+								"code": "KADASTR_SMR",
+								"value": ""
+							}, {
+								"code": "AGR_NO_SMR",
+								"value": ""
+							}, {
+								"code": "AGR_DATE_SMR",
+								"value": ""
+							}
+						]
+					}
+				],
+				"PROP_ADDITIONAL": [{
+						"values": [{
+								"code": "LAND_SQ_PRTY",
+								"value": ""
+							}, {
+								"code": "DESIGNATION_PRTY",
+								"value": ""
+							}, {
+								"code": "DESIGNATIONKZ_PRTY",
+								"value": ""
+							}, {
+								"code": "FOUNDATION_MATERIAL_PRTY",
+								"value": ""
+							}, {
+								"code": "PARTITION_MATERIAL_PRTY",
+								"value": ""
+							}, {
+								"code": "CEILING_MATERIAL_PRTY",
+								"value": ""
+							}, {
+								"code": "FLOOR_MATERIAL_PRTY",
+								"value": ""
+							}, {
+								"code": "ROOF_MATERIAL_PRTY",
+								"value": ""
+							}, {
+								"code": "WIN_DOOR_MATERIAL_PRTY",
+								"value": ""
+							}, {
+								"code": "NOTES_PRTY",
+								"value": ""
+							}, {
+								"code": "ROOMS_QTY_PRTY",
+								"value": ""
+							}, {
+								"code": "TOT_SQ_PRTY",
+								"value": ""
+							}, {
+								"code": "BUILDING_SQ_PRTY",
+								"value": ""
+							}, {
+								"code": "BUILT_YR_PRTY",
+								"value": ""
+							}, {
+								"code": "WALLS_MATERIAL_PRTY",
+								"value": ""
+							}, {
+								"code": "REG_NO_LAND_PRTY",
+								"value": ""
+							}
+						]
+					}
+				]
+			},
+			"MAIN": {
+				"EXT_COLL_ID": "",
+				"branchCode": "",
+				"code": "",
+				"description": "",
+				"groups": [{
+						"code": "COLL_DETAILS",
+						"values": [{
+								"code": "RENTAL_PERIOD",
+								"value": ""
+							}, {
+								"code": "BUILT_DATE",
+								"value": ""
+							}, {
+								"code": "NO_FLOORS",
+								"value": ""
+							}, {
+								"code": "NO_LIVING_ROOMS",
+								"value": ""
+							}, {
+								"code": "NO_NONLIV_ROOMS",
+								"value": ""
+							}, {
+								"code": "BUILDING_SQ",
+								"value": ""
+							}, {
+								"code": "LIVING_SQ",
+								"value": ""
+							}, {
+								"code": "WALLS_MATERIAL",
+								"value": ""
+							}, {
+								"code": "VOLUME",
+								"value": ""
+							}, {
+								"code": "LAND_REG_NO",
+								"value": ""
+							}, {
+								"code": "LAND_DIVIDABLE",
+								"value": ""
+							}, {
+								"code": "TOTAL_SQ",
+								"value": ""
+							}, {
+								"code": "NAME_COLL",
+								"value": ""
+							}, {
+								"code": "ACCOUNT_COLL",
+								"value": ""
+							}, {
+								"code": "AMOUNT_COLL",
+								"value": ""
+							}, {
+								"code": "BNK_AG_NO_COLL",
+								"value": ""
+							}, {
+								"code": "BNMK_AG_DATE_COLL",
+								"value": ""
+							}, {
+								"code": "BNK_AG_EXP_COLL",
+								"value": ""
+							}, {
+								"code": "GUARANTOR_COLL",
+								"value": ""
+							}, {
+								"code": "GTY_AMT_COLL",
+								"value": ""
+							}, {
+								"code": "GTY_AG_NO_COLL",
+								"value": ""
+							}, {
+								"code": "GTY_FROM_DATE_COLL",
+								"value": ""
+							}, {
+								"code": "GTY_TO_DATE_COLL",
+								"value": ""
+							}, {
+								"code": "GTY_COLL",
+								"value": ""
+							}, {
+								"code": "ADDRESS_COLL",
+								"value": ""
+							}, {
+								"code": "OWNERSHIP_COLL",
+								"rowId": ""
+							}, {
+								"code": "CAPITAL_COLL",
+								"value": ""
+							}, {
+								"code": "SHARE_COLL",
+								"value": ""
+							}, {
+								"code": "SHARE_CCY_COLL",
+								"value": ""
+							}, {
+								"code": "ISSUER_NAME_COLL",
+								"value": ""
+							}, {
+								"code": "ISSUER_NAMEKZ_COLL",
+								"value": ""
+							}, {
+								"code": "SEC_TYPE_COLL",
+								"value": ""
+							}, {
+								"code": "SEC_TYPEKZ_COLL",
+								"value": ""
+							}, {
+								"code": "SEC_QTY_COLL",
+								"value": ""
+							}, {
+								"code": "SEC_QTY_IN_COLL",
+								"value": ""
+							}, {
+								"code": "PCT_SEC_QTY_COLL",
+								"value": ""
+							}, {
+								"code": "RENT_TILL_COLL",
+								"value": ""
+							}, {
+								"code": "PURPOSE_COLL",
+								"value": ""
+							}, {
+								"code": "REG_NO_COLL",
+								"value": ""
+							}, {
+								"code": "SQ_COLL",
+								"value": ""
+							}, {
+								"code": "QTY_COLL",
+								"value": ""
+							}, {
+								"code": "DESCRIPTION_COLL",
+								"value": ""
+							}, {
+								"code": "AG_NO_COLL",
+								"value": ""
+							}, {
+								"code": "AG_DATE_COLL",
+								"value": ""
+							}, {
+								"code": "DESCRIPTIONKZ_COLL",
+								"value": ""
+							}, {
+								"code": "ADDR_COLL",
+								"value": ""
+							}, {
+								"code": "DEL_PLACE_COLL",
+								"value": ""
+							}, {
+								"code": "DEL_PLACEKZ_COLL",
+								"value": ""
+							}, {
+								"code": "DEL_TERM_COLL",
+								"value": ""
+							}, {
+								"code": "ISSUE_YR_COLL",
+								"value": ""
+							}, {
+								"code": "FACTORY_NO_COLL",
+								"value": ""
+							}, {
+								"code": "MODEL_COLL",
+								"value": ""
+							}, {
+								"code": "REG_CERT_COLL",
+								"value": ""
+							}, {
+								"code": "PLATE_NO_COLL",
+								"value": ""
+							}, {
+								"code": "TRANSPORT_TYPE_COLL",
+								"value": ""
+							}, {
+								"code": "TRANSPORT_COLOR_COLL",
+								"value": ""
+							}, {
+								"code": "ENGINE_COLL",
+								"value": ""
+							}, {
+								"code": "CHASSIS_NO_COLL",
+								"value": ""
+							}, {
+								"code": "VIN_NO_COLL",
+								"value": ""
+							}, {
+								"code": "ENGINE_HP_COLL",
+								"value": ""
+							}, {
+								"code": "ENGINE_VOL_COLL",
+								"value": ""
+							}, {
+								"code": "REG_CERT_DATE_COLL",
+								"value": ""
+							}, {
+								"code": "REG_CERT_ISSUED_COLL",
+								"value": ""
+							}, {
+								"code": "TRANS_TYPEKZ_COLL",
+								"value": ""
+							}, {
+								"code": "TRANS_COLORKZ_COLL",
+								"value": ""
+							}, {
+								"code": "ADDR_DIR",
+								"value": ""
+							}, {
+								"code": "OWN_RIGHTS",
+								"rowId": ""
+							}, {
+								"code": "LAND_SQU",
+								"value": ""
+							}, {
+								"code": "LAND_DIV",
+								"value": ""
+							}, {
+								"code": "TRANS_ADDR",
+								"value": ""
+							}, {
+								"code": "TRANS_OWN_RIGHT",
+								"rowId": ""
+							}, {
+								"code": "TRANS_RENT",
+								"value": ""
+							}, {
+								"code": "TRANS_REG_SERIE",
+								"value": ""
+							}, {
+								"code": "COLL_REG_OFFICE",
+								"value": ""
+							}, {
+								"code": "COLL_IN_DOC_NO",
+								"value": ""
+							}, {
+								"code": "COLL_IN_DOC_DATE",
+								"value": ""
+							}, {
+								"code": "COLL_INSURANCE",
+								"value": ""
+							}
+						]
+					}
+				],
+				"idn": "",
+				"objectTypeCode": "",
+				"objectTypeDescription": "",
+				"title": ""
+			}
+		}
+	}
+}

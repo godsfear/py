@@ -1,0 +1,38 @@
+{
+    "destination":
+	{
+		"type": "pgsql",
+		"host": "127.0.0.1",
+		"database": "migrate",
+		"user": "user01",
+		"password": "123"
+    },
+	"execute": "xlsx2pg_cr.sql",
+	"files":
+	[
+		{
+			"name": "in.xlsx",
+			"begin_row": 5,
+			"query":
+			{
+				"table": "loan",
+				"fields": "cust_id,loan_id,line_id,gens_id,number_,date_beg,date_end,currency,summa",
+				"type": "varchar,varchar,varchar,varchar,varchar,date,date,varchar,numeric",
+				"page": "ЗАЙМЫ",
+				"values": "3,11,9,49,11,12,13,14,28"
+			}
+		},
+		{
+			"name": "in.xlsx",
+			"begin_row": 2,
+			"query":
+			{
+				"table": "client",
+				"fields": "cust_id,type,inn,name,country,econ",
+				"type": "varchar,varchar,varchar,varchar,varchar,varchar",
+				"page": "КЛИЕНТЫ",
+				"values": "3,6,3,2,4,5"
+			}
+		}
+	]
+}

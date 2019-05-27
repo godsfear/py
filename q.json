@@ -1,0 +1,14 @@
+{
+    "postgresql": {
+		"host": "localhost",
+		"database": "testdb",
+		"user": "user01",
+		"password": "123"
+    },
+	"querys": [
+		{
+			"name": "КЛИЕНТ",
+			"query": "SELECT cust.id,cust.customer_type_id,extfld.code,extfld.name,extval.row_id,extval.value FROM customers.customer AS cust JOIN (SELECT DISTINCT customer_id FROM xloans) AS ccc ON cust.id = ccc.customer_id JOIN customers.customer_extended_field_values AS extval ON extval.customer_id = cust.id JOIN customers.customer_extended_fields AS extfld ON extval.cust_ext_field_id = extfld.id"
+		}
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"agreementNumbers": [""],
+	"amount": "",
+	"branchCode": "",
+	"currency": "",
+	"dateStart": "",
+	"groups": [{
+			"code": "LOAN_CONDITION",
+			"values": [{
+					"code": "COLL_AG_TYPE",
+					"rowId": ""
+				}
+			]
+		}, {
+			"code": "DATA_EXPORT",
+			"values": [{
+					"code": "PCB_COLL_TYPE",
+					"rowId": ""
+				}
+			]
+		}
+	],
+	"pawnObjectId": "",
+	"period": "",
+	"periodUnit": ""
+}

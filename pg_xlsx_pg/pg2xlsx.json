@@ -1,0 +1,70 @@
+{
+    "postgresql":
+	{
+		"host": "10.128.64.36",
+		"database": "executor",
+		"user": "dima",
+		"password": "qwerty"
+    },
+	"export": "out.xlsx",
+	"types":
+	{
+		"int": "### ### ### ##0;[Red]-### ### ### ##0",
+		"dec": "### ### ### ##0.00;[Red]-### ### ### ##0.00",
+		"date": "dd.mm.yyyy",
+		"char": "",
+		"z4": "0000"
+	},
+	"querys":
+	[
+		{
+			"name": "ЗАЙМ",
+			"colons": "ID ЗАЙМА;№ ДОГОВОРА;ДАТА ОТКРЫТИЯ;ДАТА ОКОНЧАНИЯ;ПОДРАЗДЕЛЕНИЕ;ID КЛИЕНТА;ТИП КЛИЕНТА;ПРОДУКТ;СУММА ВЫДАЧИ;ПЛАН ОД;ПЛАН %%;БАЗА РАСЧ.;МЕТОД ПОГ.;ВАЛЮТА;ПЕРИОД ОД;ПЕРИОД %%",
+			"type": "int;char;date;date;z4;int;int;char;dec;int;int;char;int;char;int;int",
+			"width": "12;22;10;10;6;12;5;25;15;5;5;10;5;6;5;5",
+			"query": "CREATE TEMP TABLE xloans AS SELECT agre.id,agreement_number,agre.date_start,agre.date_end,brn.code::int AS branch_code,customer_id,customer_type_id,prod.name,loans.amount,loans.repayment_maindebt_date,loans.repayment_interest_date,bas.description,loans.accrual_method_id,cur.code,loans.maindebt_repayment_freq_id,loans.interest_repayment_freq_id FROM common.agreement AS agre JOIN customers.customer AS cust ON agre.customer_id = cust.id JOIN common.branch AS brn ON agre.branch_id = brn.id JOIN loans.loan_agreement AS loans ON agre.id = loans.agreement_id JOIN common.product AS prod ON agre.product_id = prod.id JOIN common.currency AS cur ON loans.currency_id = cur.id JOIN loans.accrual_basis AS bas ON bas.id = loans.accrual_basis_id WHERE agre.status = 'ACTIVE';SELECT * FROM xloans"
+		},
+		{
+			"name": "КЛИЕНТ",
+			"colons": "ID КЛИЕНТА;ТИП КЛИЕНТА;КОД РЕКВИЗИА;НАИМ.РЕКВИЗИТА;ГРУППА;ЗНАЧЕНИЕ",
+			"type": "int;int;char;char;int;char",
+			"width": "12;5;22;30;12;30",
+			"query": "SELECT cust.id,cust.customer_type_id,extfld.code,extfld.name,extval.row_id,extval.value FROM customers.customer AS cust JOIN (SELECT DISTINCT customer_id FROM xloans) AS ccc ON cust.id = ccc.customer_id JOIN customers.customer_extended_field_values AS extval ON extval.customer_id = cust.id JOIN customers.customer_extended_fields AS extfld ON extval.cust_ext_field_id = extfld.id ORDER BY cust.id,extval.row_id"
+		},
+		{
+			"name": "ЗАЙМ ДОП.ПАРАМ",
+			"colons": "ID ЗАЙМА;КОД РЕКВИЗИА;НАИМ.РЕКВИЗИТА;ГРУППА;ЗНАЧЕНИЕ",
+			"type": "int;char;char;int;char",
+			"width": "12;22;30;12;30",
+			"query": "SELECT agre.id,extfld.code,extfld.name,extval.row_id,extval.value FROM common.agreement AS agre JOIN (SELECT DISTINCT id FROM xloans) AS lll ON agre.id = lll.id JOIN common.agreement_extended_field_values AS extval ON agre.id = extval.agreement_id JOIN common.agreement_extended_fields AS extfld ON extval.agreement_ext_field_id = extfld.id ORDER BY agre.id,extval.row_id"
+		},
+		{
+			"name": "ЗАЙМ СТАВКИ",
+			"colons": "ID ЗАЙМА;КОД СТАВКИ;НАИМ.СТАВКИ;ДАТА НАЧАЛА;В %;ВАЛЮТА;ЗНАЧЕНИЕ",
+			"type": "int;char;char;date;char;char;dec",
+			"width": "12;22;30;10;8;6;15",
+			"query": "SELECT agre.id,typ.code,typ.description,rate.start_date,rate.is_percent,cur.code,rate.value FROM common.agreement AS agre JOIN (SELECT DISTINCT id FROM xloans) AS lll ON agre.id = lll.id JOIN loans.loan_agreement AS la ON la.agreement_id = agre.id JOIN loans.loan_agreement_rp_value AS rate ON la.id = rate.loan_agreement_id JOIN common.currency AS cur ON rate.value_currency_id = cur.id JOIN loans.repayment_type AS typ ON rate.repayment_type_id = typ.id"
+		},
+		{
+			"name": "ЗАЙМ ОСТАТКИ",
+			"colons": "ID ЗАЙМА;КОД ОСТАТКА;НАИМ.ОСТАТКА;ВАЛЮТА;СЧЕТ;ДАТА;ОСТАТОК",
+			"type": "int;char;char;char;char;date;dec",
+			"width": "12;22;30;6;30;10;15",
+			"query": "SELECT agre.id,typ.code AS stype,typ.description,cur.code AS currency,sub.account_number,ost.valuedate,ost.balance FROM common.agreement AS agre JOIN (SELECT DISTINCT id FROM xloans) AS lll ON agre.id = lll.id JOIN accounts.subaccount AS sub ON sub.agreement_id = agre.id JOIN accounts.subaccount_type AS typ ON typ.id = sub.subaccount_type_id JOIN common.currency AS cur ON sub.currency_id = cur.id JOIN accounts.subaccount_turnover AS ost ON ost.subaccount_id = sub.id JOIN (SELECT subaccount_id,MAX(valuedate) AS ddd FROM accounts.subaccount_turnover GROUP BY subaccount_id) xost ON xost.subaccount_id = sub.id AND xost.ddd = ost.valuedate ORDER BY agre.id,sub.id,ost.valuedate"
+		},
+		{
+			"name": "ЗАЙМ ГРАФИК",
+			"colons": "ID ЗАЙМА;ДАТА;ТИП ПЛАТЕЖА;СУММА;ОСТАТОК ДО;ОСТАТОК ПОСЛЕ;ОПЛАЧЕН",
+			"type": "int;date;char;dec;dec;dec;char",
+			"width": "12;10;22;15;15;15;8",
+			"query": "SELECT agre.id,pay.target_date,pay.repayment_type_id,pay.amount,pay.amount_principal_before,pay.amount_principal_after,is_repaid FROM common.agreement AS agre JOIN (SELECT DISTINCT id FROM xloans) AS lll ON agre.id = lll.id JOIN loans.loan_agreement AS la ON la.agreement_id = agre.id JOIN loans.loan_repayment_schedule AS rep ON la.id = rep.loan_agreement_id AND rep.type = 'TYPE_PAYMENTS' AND rep.status = 'ACTIVE' JOIN loans.loan_repayment_schedule_item AS pay ON pay.loan_repayment_schedule_id = rep.id JOIN loans.repayment_type AS subtyp ON pay.repayment_type_id = subtyp.id ORDER BY agre.id,pay.target_date"
+		},
+		{
+			"name": "ПЕНЯ",
+			"colons": "ID ЗАЙМА;ТИП ПЛАТЕЖА;СУММА",
+			"type": "int;int;dec",
+			"width": "12;10;15",
+			"query": "SELECT agre.id,acr.repayment_type_id,SUM(acr.remained) FROM common.agreement AS agre JOIN (SELECT DISTINCT id FROM xloans) AS lll ON agre.id = lll.id JOIN loans.loan_agreement AS la ON la.agreement_id = agre.id JOIN loans.loan_agreement_accrual AS acr ON la.id = acr.loan_agreement_id AND acr.repayment_type_id in (18,19) AND acr.state = 'COUNTED' GROUP BY agre.id,acr.repayment_type_id"
+		}
+	]
+}

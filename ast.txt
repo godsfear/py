@@ -1,0 +1,17 @@
+договор
+"_loan_id","_client_id","_number","currency","migr_date","_effect","rate","open_date","end_date","summa","_product","_peni","interest_repayment_freq_id","maindebt_repayment_freq_id","bank_year","kol_d"
+
+график
+"p_date","type","curr","summa","_loan_id"
+
+остатки
+"_number","type","npc","sum","currency"
+
+залоги
+_loan_id,_open_date,_end_date,z_number,_descr,summa,summa2,registrator,reg_doc,reg_num,inn,type,type_desc,title
+
+клиент
+cli_id,lastname,name,patr,inn,resid,birth,fullname,type,doc_num,doc_iss,doc_date,doc_exp,doc_type
+
+реквизиты
+req,val

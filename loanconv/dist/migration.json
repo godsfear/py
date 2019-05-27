@@ -1,0 +1,220 @@
+{
+    "DEFAULT":
+	{
+		"type": "pgsql",
+		"host": "10.18.113.79",
+		"database": "executor_fpl",
+		"user": "db_core",
+		"password": "db_core"
+    },
+    "dimas":
+	{
+		"type": "pgsql",
+		"host": "172.16.137.8",
+		"database": "executor_fpl",
+		"user": "db_core",
+		"password": "db_core"
+    },
+    "ФПК":
+	{
+		"type": "pgsql",
+		"host": "172.16.137.11",
+		"database": "executor_fpl",
+		"user": "db_core",
+		"password": "db_core"
+    },
+    "ФПК_ПРОД":
+	{
+		"type": "pgsql",
+		"host": "10.18.113.79",
+		"database": "executor_fpl",
+		"user": "db_core",
+		"password": "db_core"
+    },
+	"МФО":
+	{
+		"type": "pgsql",
+		"host": "172.16.137.33",
+		"database": "executor_mig",
+		"user": "executor_migrate",
+		"password": "m82zsvf51"
+	},
+	"SECURITY":
+	{
+		"type": "pgsql",
+		"host": "172.16.137.3",
+		"database": "executor",
+		"user": "db_core",
+		"password": "df464DFL360aleKKfw3516KJ3KL"
+	},
+	"target":{
+        "DEFAULT": {
+            "BRANCH": {
+                "0200": "0200",
+                "39": "0200",
+                "DEFAULT": "0200"
+            },
+            "LOGIN": "admin",
+            "PASSWORD": "admin",
+            "PLAN": "БАНК",
+			"ACCT_TYPE": "INTERNAL_CLIENT",
+			"DEFAULT": {
+				"product_id": ""
+			},
+            "TRANZ": {
+                "EUR": "KZ96FPK0297800000013",
+                "KZT": "KZ71FPK0239800000010",
+                "USD": "KZ65FPK0284000000012"
+            },
+            "URL": "http://fpl-panama.corp.fpl.kz/"
+        },
+        "МФО": {
+			"MDATE": "2019-02-27",
+            "BRANCH": {
+                "DEFAULT": "2",
+                "Актобе": "3",
+                "г.Актобе": "3",
+                "Алматы": "2",
+                "г.Алматы": "2",
+                "Семей": "4",
+                "г.Семей": "4",
+                "234": "2",
+                "236": "3",
+                "237": "4"
+            },
+            "LOGIN": "migration",
+            "PASSWORD": "migration#2329",
+            "PLAN": "МКО",
+			"ACCT_TYPE": "INTERNAL_BANK",
+            "TRANZ": {
+                "KZT": "KZ124500139800001269"
+            },
+			"DEFAULT": {
+				"product_id": "Кредитная линия возобновляемая (МКМ)"
+			},
+            "URL": "https://mfo-panama.sanscrit.kz/"
+        },
+        "ФПК": {
+            "BRANCH": {
+                "0200": "0200",
+                "39": "0200",
+                "DEFAULT": "0200"
+            },
+            "LOGIN": "admin",
+            "PASSWORD": "admin",
+            "PLAN": "БАНК",
+			"ACCT_TYPE": "INTERNAL_CLIENT",
+			"DEFAULT": {
+				"product_id": ""
+			},
+            "TRANZ": {
+                "EUR": "KZ96FPK0297800000013",
+                "KZT": "KZ71FPK0239800000010",
+                "USD": "KZ65FPK0284000000012"
+            },
+            "URL": "https://fpk-panama.sanscrit.io/"
+        },
+        "ФПК_ПРОД": {
+            "BRANCH": {
+                "0200": "0200",
+                "39": "0200",
+                "DEFAULT": "0200"
+            },
+            "LOGIN": "admin",
+            "PASSWORD": "admin",
+            "PLAN": "БАНК",
+			"ACCT_TYPE": "INTERNAL_CLIENT",
+			"DEFAULT": {
+				"product_id": ""
+			},
+            "TRANZ": {
+                "EUR": "KZ96FPK0297800000013",
+                "KZT": "KZ71FPK0239800000010",
+                "USD": "KZ65FPK0284000000012"
+            },
+            "URL": "http://fpl-panama.corp.fpl.kz/"
+        },
+        "ПКБ": {
+            "LOGIN": "admin",
+            "PASSWORD": "admin",
+            "URL": "https://acc-panama.sanscrit.io/"
+        },
+        "SECURITY": {
+            "MDATE": "2019-02-27",
+			"BRANCH": {
+                "0200": "0200",
+                "39": "0200",
+                "DEFAULT": "0200"
+            },
+            "LOGIN": "admin",
+            "PASSWORD": "admin",
+            "PLAN": "БАНК",
+			"ACCT_TYPE": "INTERNAL_CLIENT",
+			"DEFAULT": {
+				"product_id": ""
+			},
+            "TRANZ": {
+                "EUR": "KZ96FPK0297800000013",
+                "KZT": "KZ71FPK0239800000010",
+                "USD": "KZ65FPK0284000000012"
+            },
+            "URL": "https://security-panama.sanscrit.io/"
+        }
+	},
+	"ACCT_ROLE": {
+		"1411": {"role":"PRNCPL","pay_type":"DEBT","description":"Срочный ОД"},
+		"1417": {"role":"PRNCPL","pay_type":"DEBT","description":"Срочный ОД"},
+		"1424": {"role":"PRNCPL_OVRD","pay_type":"OVERDUE_DEBT","main_type":"DEBT","description":"Просроченный ОД"},
+		"1740": {"role":"INTRST","pay_type":"REWARD","description":"Срочные проценты"},
+		"1741": {"role":"INTRST_OVRD","pay_type":"OVERDUE_REWARD","main_type":"REWARD","description":"Просроченные проценты"},
+		"1879": {"role":"PNLT_PRNCPL_OVRD","pay_type":"PENALTY_FOR_DEBT","description":"Пеня на просроченный ОД"},
+		"111021": {"role":"PRNCPL","pay_type":"DEBT","description":"Срочный ОД"},
+		"111022": {"role":"PRNCPL_OVRD","pay_type":"OVERDUE_DEBT","main_type":"DEBT","description":"Просроченный ОД"},
+		"127025": {"role":"INTRST","pay_type":"REWARD","description":"Срочные проценты"},
+		"127029": {"role":"INTRST_OVRD","pay_type":"OVERDUE_REWARD","main_type":"REWARD","description":"Просроченные проценты"},
+		"201021": {"role":"PRNCPL","pay_type":"DEBT","description":"Срочный ОД"},
+		"217025": {"role":"INTRST","pay_type":"REWARD","description":"Срочные проценты"},
+		"217029": {"role":"INTRST_OVRD","pay_type":"OVERDUE_REWARD","main_type":"REWARD","description":"Просроченные проценты"},
+		"128009": {"role":"PNLT_PRNCPL_OVRD","pay_type":"PENALTY_FOR_DEBT","description":"Пеня на просроченный ОД"}
+	},
+	"НПС": {
+		"БАНК": {
+			"ТРАНЗ":"2860",
+			"КРЕДИТ": {
+				"КРАТКОСРОЧНЫЙ": {
+					"PRNCPL":"1411",
+					"PRNCPL_OVRD":"1424",
+					"INTRST":"1740",
+					"INTRST_OVRD":"1741",
+					"PNLT_PRNCPL_OVRD":"1879"
+				},
+				"ДОЛГОСРОЧНЫЙ": {
+					"PRNCPL":"1417",
+					"PRNCPL_OVRD":"1424",
+					"INTRST":"1740",
+					"INTRST_OVRD":"1741",
+					"PNLT_PRNCPL_OVRD":"1879"
+				}
+			}
+		},
+		"МКО": {
+			"ТРАНЗ":"339022",
+			"КРЕДИТ": {
+				"КРАТКОСРОЧНЫЙ": {
+					"PRNCPL":"111021",
+					"PRNCPL_OVRD":"111022",
+					"INTRST":"127025",
+					"INTRST_OVRD":"127029",
+					"PNLT_PRNCPL_OVRD":"128009"
+				},
+				"ДОЛГОСРОЧНЫЙ": {
+					"PRNCPL":"201021",
+					"PRNCPL_OVRD":"111022",
+					"INTRST":"217025",
+					"INTRST_OVRD":"217029",
+					"PNLT_PRNCPL_OVRD":"128009"
+				}
+			}
+		}
+	}
+}

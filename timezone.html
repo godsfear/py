@@ -1,0 +1,25 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<div>
+			<input type="range" min="1" max="100" value="50" class="slider" id="myRange" name="myRange"/>
+			<p>Value:<span id="demo"></span></p>
+		</div>
+		<script>
+			var timezone_offset_minutes = new Date().getTimezoneOffset();
+			timezone_offset_minutes = timezone_offset_minutes == 0 ? 0 : -timezone_offset_minutes;
+			console.log(timezone_offset_minutes);
+			<!-- for PHP {$timezoneName = timezone_name_from_abbr("", 3*3600, false);} -->
+		</script>
+		<script>
+			var slider = document.getElementById("myRange");
+			var output = document.getElementById("demo");
+			output.innerHTML = slider.value;
+
+			slider.oninput = function() {
+				output.innerHTML = this.value;
+			}		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+{
+	"agreement": {
+		"status": "'ACTIVE'",
+		"agreement_number": "+",
+		"date_created": "datetime.today().date()",
+		"date_sign": "datetime.today().date()",
+		"date_start": "datetime.today().date()",
+		"origin": "+",
+		"branch_id": "+",
+		"customer_id": "+",
+		"product_id": "+",
+		"user_id": "'ADMIN'"
+	},
+	"loan_agreement": {
+		"accrual_starts_on_next_day": "True",
+		"agr_closedate_is_sch_last_date": "True",
+		"amount": "+",
+		"period_id": "[1,2]",
+		"accrual_basis_id": "'FACT_360'",
+		"accrual_method_id": "2",
+		"disburse_same_product": "False",
+		"first_payment_min_distance": "15",
+		"is_collaterized": "False",
+		"is_homogeneous": "False",
+		"is_loan_line": "False",
+		"is_lumpsum_repayment_allowed": "True",
+		"is_redemption_allowed": "True",
+		"is_renewable": "False",
+		"is_revolving_line": "False",
+		"is_tranche_allowed": "False",
+		"make_accrual_on_last_day": "True",
+		"manual_repayment": "False",
+		"penalty_limit_period_is_max": "False",
+		"purchase_as_collateral": "False",
+		"currency_id": "'KZT'",
+		"interest_repayment_freq_id": "'MONTHLY'",
+		"product_id": "+",
+		"maindebt_repayment_freq_id": "'MONTHLY'",
+		"period_id": "+",
+		"repayment_allocation_id": "'STANDART'",
+		"end_date_manually_set": "False",
+		"without_loan_repayment_schedule": "False",
+		"repayment_schedule_type_id": "ANNUITY",
+		"stop_accrual": "False"
+	},
+	"loan_agreement_rp_value": {
+		"is_annual_rate": "True",
+		"is_individual": "True",
+		"is_percent": "True",
+		"status": "'ACTIVE'",
+		"days_per_year": "360"
+	},
+	"loan_agreement_parameter": {
+		"status": "'ACTIVE'"
+	},
+	"agreement_extended_field_values": {
+		"status": "'ACTIVE'"
+	},
+	"loan_repayment_schedule": {
+		"create_date": "datetime.today().date()",
+		"status": "'ACTIVE'",
+		"type": "'TYPE_PAYMENTS'"
+	},
+	"loan_repayment_schedule_item": {
+		"amount": "0",
+		"is_delayed": "False",
+		"is_repaid": "False",
+		"target-date": "+",
+		"repayment_type_id": "+",
+		"is_migrated": "False",
+		"is_migrated_balance_item": "False"
+	}
+}
