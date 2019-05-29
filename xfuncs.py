@@ -7,7 +7,7 @@ from decimal import Decimal
 import progressbar
 
 def uqt(str,chr):
-    return str[:1].replace(chr,'') + str[1:-1].replace('""','"') + str[-1:].replace(chr,'') if str[:1] == str[-1:] else str
+    return str[:1].replace(chr,'') + str[1:-1].replace(chr + chr,chr) + str[-1:].replace(chr,'') if str[:1] == str[-1:] else str
 
 def add2date(idate,years=0,months=0,days=0):
     day = idate.day - 1 + days

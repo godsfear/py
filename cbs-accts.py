@@ -12,8 +12,8 @@ from lxml import etree
 
 def main():
     test = False
-    fname = '_commission.csv'
-    who = 'ФПК_ПРОД'
+    fname = 'cesna_loan2.csv'
+    who = 'SECURITY'
     cfg = config('migration.json')
     conn = connect(cfg[who])
     
@@ -112,22 +112,17 @@ def main():
 
     
     codes = {
-        'branch':'branch_id',
-        'saldo':'amount',
-        'abs':'amount',
-        'acc_cod':'role',
-        'currency':'currency_id',
-        'agreement_number':'agreement_number',
-        'cnum_dat':'agreement_number',
-        'migr_date':'mdate'
+        'nom':'agreement_number',
+        'od':'amount',
     }
 
     dates = ['mdate']
     decimals = ['amount']
     bools = []
     skip = ['NULL']
+    unquot = []
 
-    floans = txt2dict(fname,codes,dates,'%Y/%m/%d',decimals,bools,skip,'"',';')
+    floans = txt2dict(fname,codes,dates,'%Y/%m/%d',decimals,bools,skip,unquot,'"',';')
     xloans = []
     xtrans = []
     xcusts = {}
@@ -137,6 +132,8 @@ def main():
         for loan in floans:
             bar.update(k)
             k += 1
+            if 'role' not in loan.keys():
+                loan.update({'role':'ОД'})
             try:
                 loan['role'] = ('' if loan['role'] == '' else roles[loan['role']])
             except:

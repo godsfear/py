@@ -8,7 +8,7 @@ import requests
 from xfuncs import *
 
 def main():
-    test = True
+    test = False
     fname_cli = '8_Клиент_ЮЛ1.csv'
     fname_doc = ''
     fname_dop = ''
@@ -131,7 +131,7 @@ def main():
         cbs_fill(client,cli,'%d.%m.%Y')
         cli.update({'request':client})
 
-    documents = txt2dict(fname_doc,codes,dates,'%Y-%m-%d',decimals,bools,skip,unquot,'"',',')
+    documents = txt2dict(fname_doc,codes,dates,'%Y-%m-%d',decimals,bools,skip,unquot,'"',';')
     for doc in documents:
         if not 'EXT_ID' in doc.keys():
             continue
@@ -144,7 +144,7 @@ def main():
                 continue
             cbs_fill(cli['request'],doc,'%d.%m.%Y')
 
-    dops = txt2dict(fname_dop,codes,dates,'%Y-%m-%d',decimals,bools,skip,unquot,'"',',')
+    dops = txt2dict(fname_dop,codes,dates,'%Y-%m-%d',decimals,bools,skip,unquot,'"',';')
     for dop in dops:
         if not 'EXT_ID' in dop.keys():
             continue

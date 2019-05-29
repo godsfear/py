@@ -134,10 +134,10 @@
 			"BRANCH": {
 				"0200": "0200",
 				"39": "0200",
-				"DEFAULT": "0200"
+				"DEFAULT": "0300"
 			},
 			"DEFAULT": {
-				"product_id": ""
+				"product_id": "MigrLoan_annuity"
 			},
 			"LOGIN": "admin",
 			"PASSWORD": "admin",
@@ -154,19 +154,20 @@
 			"BRANCH": {
 				"0200": "0200",
 				"39": "0200",
-				"DEFAULT": "0200"
+				"DEFAULT": "0300"
 			},
 			"DEFAULT": {
-				"product_id": ""
+				"product_id": "MigrLoan_annuity"
 			},
 			"LOGIN": "admin",
-			"MDATE": "2019-02-27",
+			"MIGRATION_DATE": "2018-09-25",
 			"PASSWORD": "admin",
 			"PLAN": "БАНК",
 			"TRANZ": {
 				"EUR": "KZ96FPK0297800000013",
 				"KZT": "KZ71FPK0239800000010",
-				"USD": "KZ65FPK0284000000012"
+				"USD": "KZ65FPK0284000000012",
+				"RUB": "KZ62FPK0264300007487"
 			},
 			"URL": "https://security-panama.sanscrit.io/"
 		},
@@ -188,7 +189,7 @@
 				"product_id": "Кредитная линия возобновляемая (МКМ)"
 			},
 			"LOGIN": "migration",
-			"MDATE": "2019-02-27",
+			"MIGRATION_DATE": "2019-02-27",
 			"PASSWORD": "migration#2329",
 			"PLAN": "МКО",
 			"TRANZ": {
@@ -206,7 +207,7 @@
 			"BRANCH": {
 				"0200": "0200",
 				"39": "0200",
-				"DEFAULT": "0200"
+				"DEFAULT": "0300"
 			},
 			"DEFAULT": {
 				"product_id": "MigrLoan_annuity"
@@ -226,7 +227,7 @@
 			"BRANCH": {
 				"0200": "0200",
 				"39": "0200",
-				"DEFAULT": "0200"
+				"DEFAULT": "0300"
 			},
 			"DEFAULT": {
 				"product_id": "MigrLoan_annuity"

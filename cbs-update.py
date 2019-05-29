@@ -11,7 +11,7 @@ def plandate(elem):
 
 def main():
     test = False
-    who = 'ФПК_ПРОД'
+    who = 'SECURITY'
     cfg = config('migration.json')
     conn = connect(cfg[who])
     """qry = "SELECT lon.id,agr.date_start,agr.date_end FROM common.agreement AS agr JOIN loans.loan_agreement AS lon ON lon.agreement_id = agr.id"
@@ -293,7 +293,7 @@ def main():
         qry = qry + "DELETE FROM loans.loan_agreement_accrual WHERE loan_agreement_id = " + str(r[0]) + ";"
         cur = query(conn,qry)"""
 
-    qry = "SELECT lon.id,agr.id,rep.id,agr.agreement_number,bas.code,lon.amount,TO_DATE(ext.value,'DD.MM.YYYY'),agr.date_start FROM loans.loan_agreement AS lon JOIN common.agreement AS agr ON agr.id = lon.agreement_id AND NOT agr.agreement_number LIKE '%_KZT' JOIN loans.loan_repayment_schedule AS rep ON rep.loan_agreement_id = lon.id JOIN loans.accrual_basis AS bas ON bas.id = lon.accrual_basis_id JOIN common.agreement_extended_field_values AS ext ON ext.agreement_id = agr.id AND ext.agreement_ext_field_id = (SELECT id FROM common.agreement_extended_fields WHERE code = 'MIGRATION_DATE') AND TO_DATE(ext.value,'DD.MM.YYYY') < agr.date_end"
+    """qry = "SELECT lon.id,agr.id,rep.id,agr.agreement_number,bas.code,lon.amount,TO_DATE(ext.value,'DD.MM.YYYY'),agr.date_start FROM loans.loan_agreement AS lon JOIN common.agreement AS agr ON agr.id = lon.agreement_id AND NOT agr.agreement_number LIKE '%_KZT' JOIN loans.loan_repayment_schedule AS rep ON rep.loan_agreement_id = lon.id JOIN loans.accrual_basis AS bas ON bas.id = lon.accrual_basis_id JOIN common.agreement_extended_field_values AS ext ON ext.agreement_id = agr.id AND ext.agreement_ext_field_id = (SELECT id FROM common.agreement_extended_fields WHERE code = 'MIGRATION_DATE') AND TO_DATE(ext.value,'DD.MM.YYYY') < agr.date_end"
     cur = query(conn,qry)
     tab = cur.fetchall()
     for i,r in enumerate(tab):
@@ -341,7 +341,22 @@ def main():
                 mgr = cur.fetchall()
                 for pm in mgr:
                     qry = "UPDATE loans.loan_repayment_schedule_item SET int_prior_to_migration = " + str(clc) + " WHERE id = " + str(pm[0])
-                    cur = query(conn,qry)
+                    cur = query(conn,qry)"""
+    
+    
+    codes = {
+        'TAX_NUMBER':'IDN',
+        'CLITAXCODE':'IDN'
+    }
+    clients = txt2dict('8_Клиент_ЮЛ1.csv',codes,[],'%Y-%m-%d',[],[],[],[],'"',';')
+    print(clients)
+    for cli in clients:
+        cust = "SELECT ext.customer_id FROM customers.customer AS cus JOIN customers.customer_extended_field_values AS ext ON ext.customer_id = cus.id AND ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'IDN') AND ext.value = '" + cli['IDN'] + "'"
+        cur = query(conn,cust)
+        tab = cur.fetchall()
+        for r in tab:
+            qry = "UPDATE customers.customer SET branch_id = (SELECT id FROM common.branch WHERE code = '0300') WHERE customers.customer.id = " + str(r[0])
+            cur = query(conn,qry)
 
     if test:
         conn.rollback()
