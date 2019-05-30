@@ -113,7 +113,7 @@ def main():
     
     codes = {
         'nom':'agreement_number',
-        'od':'amount',
+        'pen':'amount',
     }
 
     dates = ['mdate']
@@ -132,8 +132,8 @@ def main():
         for loan in floans:
             bar.update(k)
             k += 1
-            if 'role' not in loan.keys():
-                loan.update({'role':'ОД'})
+            """if 'role' not in loan.keys():
+                loan.update({'role':'ПЕН'})"""
             try:
                 loan['role'] = ('' if loan['role'] == '' else roles[loan['role']])
             except:

@@ -344,7 +344,7 @@ def main():
                     cur = query(conn,qry)"""
     
     
-    codes = {
+    """codes = {
         'TAX_NUMBER':'IDN',
         'CLITAXCODE':'IDN'
     }
@@ -356,7 +356,16 @@ def main():
         tab = cur.fetchall()
         for r in tab:
             qry = "UPDATE customers.customer SET branch_id = (SELECT id FROM common.branch WHERE code = '0300') WHERE customers.customer.id = " + str(r[0])
-            cur = query(conn,qry)
+            cur = query(conn,qry)"""
+
+    """qry = "SELECT pln.id,TO_DATE(ext.value,'DD.MM.YYYY') FROM loans.loan_repayment_schedule_item AS pln JOIN loans.loan_repayment_schedule AS sch ON sch.id = pln.loan_repayment_schedule_id JOIN loans.loan_agreement AS lon ON lon.id = sch.loan_agreement_id JOIN common.agreement AS agr ON agr.id = lon.agreement_id JOIN common.agreement_extended_field_values AS ext ON ext.agreement_id = agr.id AND ext.agreement_ext_field_id = (SELECT id FROM common.agreement_extended_fields WHERE code = 'MIGRATION_DATE') WHERE pln.is_delayed AND pln.date_delayed IS NULL"
+    cur = query(conn,qry)
+    tab = cur.fetchall()
+    for r in tab:
+        print(r[0],r[1])
+        qry = "UPDATE loans.loan_repayment_schedule_item SET date_delayed = '" + r[1].strftime('%Y-%m-%d') + "'::DATE WHERE id = " + str(r[0])
+        cur = query(conn,qry)"""
+    
 
     if test:
         conn.rollback()
