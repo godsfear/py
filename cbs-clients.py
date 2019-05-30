@@ -67,7 +67,7 @@ def main():
         '_value':'_VAL'
     }
     
-    clicat = {'CL_ORG':'JURIDICAL','CL_PRIV':'INDIVIDUAL','0':'INDIVIDUAL','1':'JURIDICAL','Юридические лица':'JURIDICAL','7':'JURIDICAL'}
+    clicat = {'CL_ORG':'JURIDICAL','CL_PRIV':'INDIVIDUAL','0':'INDIVIDUAL','1':'JURIDICAL','Юридические лица':'JURIDICAL','7':'JURIDICAL','ю':'JURIDICAL','ч':'INDIVIDUAL'}
     resident = {'0':'true','1':'false'}
 
     sprav = ['ID_DOC']
@@ -75,7 +75,7 @@ def main():
     bools = []
     decimals = []
     skip = ['NULL']
-    unquot = ['J_NAME','J_SHORT_NAME']
+    unquot = ['J_NAME','J_SHORT_NAME','Клиент']
 
     iddoc = {'Удостоверение личности РК':'96'}
 

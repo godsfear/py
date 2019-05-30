@@ -87,7 +87,7 @@ def main():
     extend = ['LOAN_NAME_OLD','EXT_ID','MIGRATION_DATE']
     unquot = []
     
-    rep_period = {'индивидуальная':'ARBITRARY'}
+    rep_period = {'индивидуальная':'ARBITRARY','индивидуальный':'ARBITRARY'}
     plan_type = {'2':'DIFFERENTIAL','1':'ANNUITY'}
     basis = {'факт/360':'FACT_360','30/360':'30_360','факт/факт':'FACT_FACT'}
     

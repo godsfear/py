@@ -232,7 +232,7 @@ def main():
         qry = "DELETE FROM loans.loan_agreement_accrual WHERE loan_agreement_id = " + str(r[0]) + " AND NOT is_deferred AND repayment_type_id = (SELECT id FROM loans.repayment_type WHERE code = 'REWARD');"
         cur = query(conn,qry)"""
 
-    """qry = "SELECT lon.id,agr.id,rep.id,agr.agreement_number,bas.code,lon.amount,TO_DATE(ext.value,'DD.MM.YYYY'),agr.date_start FROM loans.loan_agreement AS lon JOIN common.agreement AS agr ON agr.id = lon.agreement_id AND NOT agr.agreement_number LIKE '%_KZT' JOIN loans.loan_repayment_schedule AS rep ON rep.loan_agreement_id = lon.id JOIN loans.accrual_basis AS bas ON bas.id = lon.accrual_basis_id JOIN common.agreement_extended_field_values AS ext ON ext.agreement_id = agr.id AND ext.agreement_ext_field_id = (SELECT id FROM common.agreement_extended_fields WHERE code = 'MIGRATION_DATE') AND TO_DATE(ext.value,'DD.MM.YYYY') < agr.date_end"
+    """qry = "SELECT lon.id,agr.id,rep.id,agr.agreement_number,bas.code,lon.amount,TO_DATE(ext.value,'DD.MM.YYYY'),agr.date_start FROM loans.loan_agreement AS lon JOIN common.agreement AS agr ON agr.id = lon.agreement_id AND NOT agr.agreement_number LIKE '%_KZT' AND agr.branch_id = (SELECT id FROM common.branch WHERE code = '0300') JOIN loans.loan_repayment_schedule AS rep ON rep.loan_agreement_id = lon.id JOIN loans.accrual_basis AS bas ON bas.id = lon.accrual_basis_id JOIN common.agreement_extended_field_values AS ext ON ext.agreement_id = agr.id AND ext.agreement_ext_field_id = (SELECT id FROM common.agreement_extended_fields WHERE code = 'MIGRATION_DATE') AND TO_DATE(ext.value,'DD.MM.YYYY') < agr.date_end"
     cur = query(conn,qry)
     tab = cur.fetchall()
     for i,r in enumerate(tab):
@@ -293,7 +293,7 @@ def main():
         qry = qry + "DELETE FROM loans.loan_agreement_accrual WHERE loan_agreement_id = " + str(r[0]) + ";"
         cur = query(conn,qry)"""
 
-    """qry = "SELECT lon.id,agr.id,rep.id,agr.agreement_number,bas.code,lon.amount,TO_DATE(ext.value,'DD.MM.YYYY'),agr.date_start FROM loans.loan_agreement AS lon JOIN common.agreement AS agr ON agr.id = lon.agreement_id AND NOT agr.agreement_number LIKE '%_KZT' JOIN loans.loan_repayment_schedule AS rep ON rep.loan_agreement_id = lon.id JOIN loans.accrual_basis AS bas ON bas.id = lon.accrual_basis_id JOIN common.agreement_extended_field_values AS ext ON ext.agreement_id = agr.id AND ext.agreement_ext_field_id = (SELECT id FROM common.agreement_extended_fields WHERE code = 'MIGRATION_DATE') AND TO_DATE(ext.value,'DD.MM.YYYY') < agr.date_end"
+    """qry = "SELECT lon.id,agr.id,rep.id,agr.agreement_number,bas.code,lon.amount,TO_DATE(ext.value,'DD.MM.YYYY'),agr.date_start FROM loans.loan_agreement AS lon JOIN common.agreement AS agr ON agr.id = lon.agreement_id AND NOT agr.agreement_number LIKE '%_KZT' AND agr.branch_id = (SELECT id FROM common.branch WHERE code = '0300') JOIN loans.loan_repayment_schedule AS rep ON rep.loan_agreement_id = lon.id JOIN loans.accrual_basis AS bas ON bas.id = lon.accrual_basis_id JOIN common.agreement_extended_field_values AS ext ON ext.agreement_id = agr.id AND ext.agreement_ext_field_id = (SELECT id FROM common.agreement_extended_fields WHERE code = 'MIGRATION_DATE') AND TO_DATE(ext.value,'DD.MM.YYYY') < agr.date_end"
     cur = query(conn,qry)
     tab = cur.fetchall()
     for i,r in enumerate(tab):
@@ -364,6 +364,13 @@ def main():
     for r in tab:
         print(r[0],r[1])
         qry = "UPDATE loans.loan_repayment_schedule_item SET date_delayed = '" + r[1].strftime('%Y-%m-%d') + "'::DATE WHERE id = " + str(r[0])
+        cur = query(conn,qry)"""
+
+    """qry = "SELECT lon.id FROM loans.loan_agreement AS lon JOIN common.agreement AS agr ON agr.id = lon.agreement_id AND agr.branch_id = (SELECT id FROM common.branch WHERE code = '0300')"
+    cur = query(conn,qry)
+    tab = cur.fetchall()
+    for r in tab:
+        qry = "UPDATE loans.loan_agreement SET accrual_method_id = (SELECT id FROM loans.accrual_method WHERE code = 'FIXED_METHOD'),maindebt_repayment_freq_id = (SELECT id FROM loans.repayment_period WHERE code = 'ARBITRARY'),interest_repayment_freq_id = (SELECT id FROM loans.repayment_period WHERE code = 'ARBITRARY'),repayment_schedule_type_id = (SELECT id FROM loans.repayment_schedule_type WHERE code = 'DIFFERENTIAL') WHERE id = " + str(r[0])
         cur = query(conn,qry)"""
     
 

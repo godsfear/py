@@ -21,7 +21,7 @@ def main():
     z = '-'.join([r[24:],r[20:24],r[16:20],r[0:4],r[4:16]])
     print(z)"""
     
-    path = "z:\\akim\\ФПК\\Цесна\\Выгрузка\\Таблица с информацией\\График"
+    """path = "z:\\akim\\ФПК\\Цесна\\Выгрузка\\Таблица с информацией\\График"
     files = [f for f in glob.glob(path + "**/*.xlsx", recursive=True)]
 
     for f in files:
@@ -88,8 +88,14 @@ def main():
             if ok:
                 if str(row[4]).replace(' ','') == '' and str(row[5]).replace(' ','') == '':
                     continue
-                print(nom,';',str(row[2]).replace(' ',''),';',str(row[4]).replace(' ',''),';',str(row[5]).replace(' ',''),';',str(row[idx]).replace(' ',''))
-    
+                print(nom,';',str(row[2]).replace(' ',''),';',str(row[4]).replace(' ',''),';',str(row[5]).replace(' ',''),';',str(row[idx]).replace(' ',''))"""
+
+    clients = txt2dict('ast_cli.csv',{'Клиент':'name','БИН/ИИН':'idn','Признак резидентства':'resident','Сектор экономики':'type','Адрес':'address','Телефон':'phone'},[],'%Y-%m-%d',[],[],[],['name'],'"',';')
+    for cli in clients:
+        cli['address'] = cli['address'].replace('\x01','|').split('|')
+        cli['address'] = [cli['address'][4],cli['address'][2]]
+        print(cli)
+
     
 if __name__ == '__main__':
     main()
