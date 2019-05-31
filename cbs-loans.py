@@ -57,6 +57,7 @@ def main():
         'fact':'accrual_basis_id'
     }
     codes_plan = {
+        'loan':'EXT_ID',
         'C_SID':'EXT_ID',
         'DATE_REPAYMENT':'target_date',
         'PRINCIPAL_AMOUNT':'amount_od',
@@ -65,8 +66,11 @@ def main():
         '_loan_id':'EXT_ID',
         'idcrd':'EXT_ID',
         'cnum_dat':'agreement_number',
+        'date':'target_date',
         '_pdate':'target_date',
         'p_date':'target_date',
+        'od':'amount_od',
+        'pr':'amount_pr',
         '_od':'amount_od',
         '_pr':'amount_pr',
         'pattern_code':'pay_code',
@@ -147,6 +151,9 @@ def main():
             loan['interest_repayment_freq_id'] = rep_period[loan['interest_repayment_freq_id']]
         except:
             pass
+        if loan['interest_repayment_freq_id'] == 'ARBITRARY':
+            loan['repayment_schedule_type_id'] = 'DIFFERENTIAL'
+            loan['accrual_method_id'] = 'FIXED_METHOD'
         try:
             tmp = loan['MIGRATION_DATE']
         except:

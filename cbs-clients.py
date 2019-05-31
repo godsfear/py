@@ -8,8 +8,8 @@ import requests
 from xfuncs import *
 
 def main():
-    test = False
-    fname_cli = '8_Клиент_ЮЛ1.csv'
+    test = True
+    fname_cli = 'ast_cli.csv'
     fname_doc = ''
     fname_dop = ''
     who = 'SECURITY'
@@ -68,7 +68,7 @@ def main():
     }
     
     clicat = {'CL_ORG':'JURIDICAL','CL_PRIV':'INDIVIDUAL','0':'INDIVIDUAL','1':'JURIDICAL','Юридические лица':'JURIDICAL','7':'JURIDICAL','ю':'JURIDICAL','ч':'INDIVIDUAL'}
-    resident = {'0':'true','1':'false'}
+    resident = {'0':'true','1':'false','true':'true','false':'false'}
 
     sprav = ['ID_DOC']
     dates = ['BIRTH','ISSUE_DATE_PASS','EXPIRY_PASS']
@@ -84,7 +84,8 @@ def main():
         'Адрес прописки':'adr_p',
         'Телефон':'tel_',
         'Телефон домашний':'tel_d',
-        'Факс':'tel_r'
+        'Факс':'tel_r',
+        'АдрФакт': 'adr_j'
     }
 
     rowid = {
@@ -127,6 +128,11 @@ def main():
             cli['customerType'] = clicat[cli['customerType']]
         if fname_doc == '' and not 'ID_DOC' in cli.keys() and cli['customerType'] == 'INDIVIDUAL':
             cli['ID_DOC'] = iddoc['Удостоверение личности РК']
+        """if 'address' in cli.keys():
+            cli['address'] = cli['address'].replace('\x01','|').split('|')
+            if len(cli['address']) > 4:
+                cli['address'] = [cli['address'][4],cli['address'][2]]"""
+
         client = copy.deepcopy(templ['CLIENT']['MAIN'])
         cbs_fill(client,cli,'%d.%m.%Y')
         cli.update({'request':client})

@@ -132,8 +132,8 @@ def main():
         for loan in floans:
             bar.update(k)
             k += 1
-            """if 'role' not in loan.keys():
-                loan.update({'role':'ПЕН'})"""
+            if 'role' not in loan.keys():
+                loan.update({'role':'ПЕН'})
             try:
                 loan['role'] = ('' if loan['role'] == '' else roles[loan['role']])
             except:
@@ -269,8 +269,8 @@ def main():
             for r in (tab):
                 if r[0] != 0:
                     skip = True
-            """if skip:
-                continue"""
+            if skip:
+                continue
             ops = {
                 'code':'IMPORT_ACCOUNT_BALANCES',
                 'eventParameters': {

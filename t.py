@@ -90,11 +90,13 @@ def main():
                     continue
                 print(nom,';',str(row[2]).replace(' ',''),';',str(row[4]).replace(' ',''),';',str(row[5]).replace(' ',''),';',str(row[idx]).replace(' ',''))"""
 
-    clients = txt2dict('ast_cli.csv',{'Клиент':'name','БИН/ИИН':'idn','Признак резидентства':'resident','Сектор экономики':'type','Адрес':'address','Телефон':'phone'},[],'%Y-%m-%d',[],[],[],['name'],'"',';')
+    """clients = txt2dict('ast_cli.csv',{'Клиент':'name','БИН/ИИН':'idn','Признак резидентства':'resident','Сектор экономики':'type','Адрес':'address','Телефон':'phone'},[],'%Y-%m-%d',[],[],[],['name'],'"',';')
     for cli in clients:
         cli['address'] = cli['address'].replace('\x01','|').split('|')
         cli['address'] = [cli['address'][4],cli['address'][2]]
-        print(cli)
+        print(cli)"""
+
+
 
     
 if __name__ == '__main__':
