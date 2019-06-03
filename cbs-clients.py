@@ -8,22 +8,28 @@ import requests
 from xfuncs import *
 
 def main():
-    test = True
-    fname_cli = 'ast_cli.csv'
+    test = False
+    fname_cli = 'ast_cli_2.csv'
     fname_doc = ''
     fname_dop = ''
     who = 'SECURITY'
-    portf = 'TSESNA'
+    portf = 'ASTANA'
 
     cfg = config('migration.json')
     conn = connect(cfg[who])
 
     head = {'Content-type':'application/json','Accept':'text/plain'}
     codes = {
+        'id': 'EXT_CODE',
+        'inn':'IDN',
+        'type':'customerType',
+        'resident':'RESIDENT',
         'P_SID': 'EXT_ID',
         'P_SID': 'EXT_CODE',
         'LONGNAME': 'J_NAME',
         'NAME_LEGAL': 'J_NAME',
+        'name': 'J_NAME',
+        'name': 'J_SHORT_NAME',
         'NAME': 'J_SHORT_NAME',
         'NAME_SHORT': 'J_SHORT_NAME',
         'CLITAXCODE': 'IDN',
@@ -47,7 +53,6 @@ def main():
         'bin_iin':'IDN',
         'rnn':'rnn',
         '_rezident':'RESIDENT',
-        'resident':'RESIDENT',
         '_birth':'BIRTH',
         'birth':'BIRTH',
         '_full_name':'J_NAME',
@@ -67,8 +72,8 @@ def main():
         '_value':'_VAL'
     }
     
-    clicat = {'CL_ORG':'JURIDICAL','CL_PRIV':'INDIVIDUAL','0':'INDIVIDUAL','1':'JURIDICAL','Юридические лица':'JURIDICAL','7':'JURIDICAL','ю':'JURIDICAL','ч':'INDIVIDUAL'}
-    resident = {'0':'true','1':'false','true':'true','false':'false'}
+    clicat = {'CL_ORG':'JURIDICAL','CL_PRIV':'INDIVIDUAL','0':'INDIVIDUAL','1':'JURIDICAL','Юридические лица':'JURIDICAL','7':'JURIDICAL','Ю':'JURIDICAL','Ч':'INDIVIDUAL','ю':'JURIDICAL','ч':'INDIVIDUAL'}
+    resident = {'0':'true','1':'false','true':'true','false':'false','yes':'true','no':'false'}
 
     sprav = ['ID_DOC']
     dates = ['BIRTH','ISSUE_DATE_PASS','EXPIRY_PASS']
@@ -126,8 +131,8 @@ def main():
             cli['RESIDENT'] = resident[cli['RESIDENT']]
         if 'customerType' in cli.keys():
             cli['customerType'] = clicat[cli['customerType']]
-        if fname_doc == '' and not 'ID_DOC' in cli.keys() and cli['customerType'] == 'INDIVIDUAL':
-            cli['ID_DOC'] = iddoc['Удостоверение личности РК']
+        """if fname_doc == '' and not 'ID_DOC' in cli.keys() and cli['customerType'] == 'INDIVIDUAL':
+            cli['ID_DOC'] = iddoc['Удостоверение личности РК']"""
         """if 'address' in cli.keys():
             cli['address'] = cli['address'].replace('\x01','|').split('|')
             if len(cli['address']) > 4:

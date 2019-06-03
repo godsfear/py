@@ -154,7 +154,7 @@
 			"BRANCH": {
 				"0200": "0200",
 				"39": "0200",
-				"DEFAULT": "0300"
+				"DEFAULT": "0400"
 			},
 			"DEFAULT": {
 				"product_id": "MigrLoan_annuity"

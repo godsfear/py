@@ -14,9 +14,9 @@ from openpyxl import load_workbook
 import xlrd
 
 def main():
-    """who = 'МФО'
+    who = 'SECURITY'
     cfg = config('migration.json')
-    conn = connect(cfg[who])"""
+    conn = connect(cfg[who])
     """r = '829e2c4d54674cb511e7e1670843bcda'
     z = '-'.join([r[24:],r[20:24],r[16:20],r[0:4],r[4:16]])
     print(z)"""
@@ -90,14 +90,20 @@ def main():
                     continue
                 print(nom,';',str(row[2]).replace(' ',''),';',str(row[4]).replace(' ',''),';',str(row[5]).replace(' ',''),';',str(row[idx]).replace(' ',''))"""
 
-    """clients = txt2dict('ast_cli.csv',{'Клиент':'name','БИН/ИИН':'idn','Признак резидентства':'resident','Сектор экономики':'type','Адрес':'address','Телефон':'phone'},[],'%Y-%m-%d',[],[],[],['name'],'"',';')
+    """clients = txt2dict('ast_cli_2.csv',{'id':'EXT_ID','inn':'idn','resident':'resident','name':'J_NAME'},[],'%Y-%m-%d',[],[],[],['name'],'"',';')
     for cli in clients:
-        cli['address'] = cli['address'].replace('\x01','|').split('|')
-        cli['address'] = [cli['address'][4],cli['address'][2]]
-        print(cli)"""
+        cust = "SELECT ext.customer_id FROM customers.customer AS cus JOIN customers.customer_extended_field_values AS ext ON ext.customer_id = cus.id AND ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'IDN') AND ext.value = '" + cli['idn'] + "'"
+        cur = query(conn,cust)
+        tab = cur.fetchall()
+        for r in tab:
+            qry = "INSERT INTO customers.customer_extended_field_values (id,status,date_start,value,customer_id,cust_ext_field_id) SELECT NEXTVAL('customers.customer_extended_field_values_seq_id') AS id,'ACTIVE' AS status,'2019-06-03'::DATE AS date_start,'" + cli['J_NAME'] + "' AS value," + str(r[0]) + " AS customer_id,(SELECT id FROM customers.customer_extended_fields WHERE code = 'J_NAME')"
+            cur = query(conn,qry)
+            qry = "INSERT INTO customers.customer_extended_field_values (id,status,date_start,value,customer_id,cust_ext_field_id) SELECT NEXTVAL('customers.customer_extended_field_values_seq_id') AS id,'ACTIVE' AS status,'2019-06-03'::DATE AS date_start,'" + cli['J_NAME'] + "' AS value," + str(r[0]) + " AS customer_id,(SELECT id FROM customers.customer_extended_fields WHERE code = 'J_SHORT_NAME')"
+            cur = query(conn,qry)
+            qry = "UPDATE customers.customer_extended_field_values SET value = " + cli['J_NAME'] + " WHERE cust_ext_field_id = 5 AND customer_id = " + str(r[0])
+            print(qry)
 
-
-
+    conn.commit()"""
     
 if __name__ == '__main__':
     main()

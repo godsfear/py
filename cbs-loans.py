@@ -15,27 +15,33 @@ def plandate(elem):
 def main():
     test = False
     line = False
-    fname_loan = 'cesna_loan2.csv'
-    fname_plan = 'cesna_plan2.csv'
+    fname_loan = 'ast_loan_2.csv'
+    fname_plan = 'ast_graf_2.csv'
     who = 'SECURITY'
-    portf = 'TSESNA'
+    portf = 'ASTANA'
     cfg = config('migration.json')
     conn = connect(cfg[who])
     
     codes_loan = {
         'id':'EXT_ID',
         'nom':'agreement_number',
+        'number':'agreement_number',
         'opn':'date_start',
         'end':'date_end',
         'cur':'currency_id',
         'rate':'BASE`REWARD',
         'rate_p':'PENALTY`PENALTY_FOR_DEBT',
+        'reate_pod':'PENALTY`PENALTY_FOR_DEBT',
+        'rate_ppr':'PENALTY`PENALTY_FOR_REWARD',
         'amount':'amount',
+        'sum':'amount',
         'effect':'PERCENT_APR`NUMBER',
+        'eff':'PERCENT_APR`NUMBER',
         'base':'accrual_basis_id',
         'ann':'repayment_schedule_type_id',
         '_loan_id':'EXT_ID',
         'inn':'_CLIENT_EXT_ID',
+        'cust_id':'_CLIENT_EXT_ID',
         'line_id':'_LINE',
         '_type':'product_id',
         '_number':'agreement_number', 
@@ -53,10 +59,16 @@ def main():
         '_peni':'PENALTY`PENALTY_FOR_DEBT',
         'interest_repayment_freq_id':'interest_repayment_freq_id',
         'maindebt_repayment_freq_id':'maindebt_repayment_freq_id',
+        'cred_per':'maindebt_repayment_freq_id',
+        'int_per':'interest_repayment_freq_id',
         'migr_date':'MIGRATION_DATE',
-        'fact':'accrual_basis_id'
+        'mdate':'MIGRATION_DATE',
+        'fact':'accrual_basis_id',
+        'cred_date':'repayment_maindebt_date',
+        'int_date':'repayment_interest_date'
     }
     codes_plan = {
+        'id':'EXT_ID',
         'loan':'EXT_ID',
         'C_SID':'EXT_ID',
         'DATE_REPAYMENT':'target_date',
@@ -74,7 +86,9 @@ def main():
         '_od':'amount_od',
         '_pr':'amount_pr',
         'pattern_code':'pay_code',
+        'type':'pay_code',
         'summa':'amount',
+        'amount':'amount',
         '_ost_pre':'amount_principal_before',
         '_ost_aft':'amount_principal_after'
     }
@@ -84,16 +98,16 @@ def main():
     }
     dates = ['date_start','date_end','target_date','date_sign','MIGRATION_DATE']
     bools = []
-    decimals = ['srok','amount','amount_od','amount_principal_after','amount_principal_before','amount_pr']
+    decimals = ['srok','amount','amount_od','amount_principal_after','amount_principal_before','amount_pr','repayment_maindebt_date','repayment_interest_date']
     skip = []
     rates = ['BASE`REWARD','PENALTY`PENALTY_FOR_DEBT']
     param = ['PERCENT_APR`NUMBER','ACCRUEMENT_START_DATE`DATE']
     extend = ['LOAN_NAME_OLD','EXT_ID','MIGRATION_DATE']
     unquot = []
     
-    rep_period = {'индивидуальная':'ARBITRARY','индивидуальный':'ARBITRARY'}
+    rep_period = {'индивидуальная':'ARBITRARY','индивидуальный':'ARBITRARY','М':'MONTHLY','Кс':'AT_THE_END'}
     plan_type = {'2':'DIFFERENTIAL','1':'ANNUITY'}
-    basis = {'факт/360':'FACT_360','30/360':'30_360','факт/факт':'FACT_FACT'}
+    basis = {'факт/360':'FACT_360','30/360':'30_360','факт/факт':'FACT_FACT','2':'FACT_360','0':'30_360'}
     
     pay_code = {
         '<CRD>CUR':'DEBT',
@@ -101,13 +115,16 @@ def main():
         '<CRD>':'DEBT',
         '<PRC>':'REWARD',
         '<CRD>EQL':'DEBT',
-        '<PRC>EQL':'REWARD'
+        '<PRC>EQL':'REWARD',
+        '1':'REWARD',
+        '3':'DEBT',
+        '2':'amount_principal_after'
     }
     
-    loans = txt2dict(fname_loan,codes_loan,dates,'%Y-%m-%d',decimals,bools,skip,unquot,'"',';')
+    loans = txt2dict(fname_loan,codes_loan,dates,'%d/%m/%Y',decimals,bools,skip,unquot,'"',';')
     plans = []
     if fname_plan != '':
-        plans = txt2dict(fname_plan,codes_plan,dates,'%Y-%m-%d',decimals,bools,skip,unquot,'"',';')
+        plans = txt2dict(fname_plan,codes_plan,dates,'%d/%m/%Y',decimals,bools,skip,unquot,'"',';')
     kol = len(loans)
     k = 0
     for loan in loans:
@@ -129,7 +146,7 @@ def main():
         if len(tab) != 0:
             continue
         if portf != '':
-            cust = "SELECT ext.customer_id FROM customers.customer_extended_field_values AS ext JOIN customers.cust_ext_field_rows AS rws ON rws.id = ext.row_id JOIN common.extended_field_group AS grp ON grp.id = rws.cust_ext_field_group_id AND grp.group_type = 'CUSTOMERS' AND grp.code = 'PORTFOLIO' JOIN customers.customer_extended_fields AS fld ON fld.code = 'PORTFOLIO_CODE' AND fld.ext_field_group_id = grp.id JOIN customers.customer_extended_field_values AS prf ON prf.cust_ext_field_id = fld.id AND prf.row_id = ext.row_id AND prf.value = 'BTA' WHERE ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'EXT_CODE') AND ext.value = '" + loan['_CLIENT_EXT_ID'] + "';"
+            cust = "SELECT ext.customer_id FROM customers.customer_extended_field_values AS ext JOIN customers.cust_ext_field_rows AS rws ON rws.id = ext.row_id JOIN common.extended_field_group AS grp ON grp.id = rws.cust_ext_field_group_id AND grp.group_type = 'CUSTOMERS' AND grp.code = 'PORTFOLIO' JOIN customers.customer_extended_fields AS fld ON fld.code = 'PORTFOLIO_CODE' AND fld.ext_field_group_id = grp.id JOIN customers.customer_extended_field_values AS prf ON prf.cust_ext_field_id = fld.id AND prf.row_id = ext.row_id AND prf.value = '" + portf + "' WHERE ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'EXT_CODE') AND ext.value = '" + loan['_CLIENT_EXT_ID'] + "';"
         else:
             cust = "SELECT customer_id FROM customers.customer_extended_field_values AS ext WHERE ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'EXT_ID' AND ext.value = '" + loan['_CLIENT_EXT_ID'] + "';"
         cur = query(conn,cust)
@@ -237,6 +254,10 @@ def main():
         loan.update({'extend':exs})
         plan_grp = {'EXT_ID':loan['EXT_ID'],'create_date':datetime.today().date(),'date_end':loan['date_end'],'date_start':loan['date_start'],'status':'ACTIVE','type':'TYPE_PAYMENTS'}
         plan = []
+        if 'repayment_maindebt_date' in loan.keys():
+            reppriday = loan['repayment_maindebt_date']
+        if 'repayment_interest_date' in loan.keys():
+            repintday = loan['repayment_interest_date']
         repintday = 0
         reppriday = 0
         for _pl in plans:
@@ -244,6 +265,8 @@ def main():
                 continue
             if 'pay_code' in _pl.keys():
                 _pl['pay_code'] = pay_code[_pl['pay_code']]
+                if _pl['pay_code'] not in ['DEBT','REWARD']:
+                    continue
                 if repintday == 0 and _pl['pay_code'] == 'REWARD':
                     repintday = _pl['target_date'].day
                 if reppriday == 0 and _pl['pay_code'] == 'DEBT':
