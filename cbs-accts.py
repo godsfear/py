@@ -14,11 +14,12 @@ def main():
     test = False
     fname = 'cesna_loan2.csv'
     who = 'SECURITY'
+    portf = 'TSESNA'
     cfg = config('migration.json')
     conn = connect(cfg[who])
     
     head = {'Content-type':'application/json','Accept':'text/plain'}
-    srok = {'КРАТКОСРОЧНЫЙ':['1'],'ДОЛГОСРОЧНЫЙ':['0']}
+    srok = {'1':'КРАТКОСРОЧНЫЙ','2':'ДОЛГОСРОЧНЫЙ','0':'ДОЛГОСРОЧНЫЙ'}
 
     roles = {
         "ACCOUNT": "PRNCPL",
@@ -107,13 +108,13 @@ def main():
         "ПОД": "PRNCPL_OVRD",
         "FEE_ACR": "FEE_ACR",
         "FEE_OVRD": "FEE_OVRD",
-        "PNLT_FEE_OVRD": "PNLT_FEE_OVRD"
+        "PNLT_FEE_OVRD": "PNLT_FEE_OVRD",
+        "PNLT_MISC": "PNLT_MISC"
     }
 
-    
     codes = {
         'nom':'agreement_number',
-        'pen':'amount',
+        'pen_z':'amount',
     }
 
     dates = ['mdate']
@@ -133,7 +134,7 @@ def main():
             bar.update(k)
             k += 1
             if 'role' not in loan.keys():
-                loan.update({'role':'ПЕН'})
+                loan.update({'role':'PNLT_MISC'})
             try:
                 loan['role'] = ('' if loan['role'] == '' else roles[loan['role']])
             except:
@@ -141,6 +142,8 @@ def main():
                 return
             if loan['role'] == '':
                 continue
+            if 'srok' in loan.keys():
+                loan['srok'] = srok[loan['srok']]
             qry = "SELECT cus.code,ext.value,cus.id,agr.date_start,agr.date_end,cur.code,lon.id,agr.id FROM customers.customer AS cus JOIN common.agreement AS agr ON agr.agreement_number = '" + loan['agreement_number'] + "' AND agr.customer_id = cus.id JOIN loans.loan_agreement AS lon ON lon.agreement_id = agr.id JOIN common.currency AS cur ON cur.id = lon.currency_id JOIN customers.customer_extended_field_values AS ext ON ext.customer_id = cus.id AND ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'IDN')"
             cur = query(conn,qry)
             tab = cur.fetchall()
@@ -152,7 +155,8 @@ def main():
                 loan.update({'customer_id':r[2]})
                 loan.update({'date_start':r[3].date()})
                 loan.update({'date_end':r[4].date()})
-                loan.update({'srok':('КРАТКОСРОЧНЫЙ' if loan_short(r[3].date(),r[4].date()) else 'ДОЛГОСРОЧНЫЙ')})
+                if 'srok' not in loan.keys():
+                    loan.update({'srok':('КРАТКОСРОЧНЫЙ' if loan_short(r[3].date(),r[4].date()) else 'ДОЛГОСРОЧНЫЙ')})
                 loan.update({'currency_id':r[5]})
                 loan.update({'loan_agreement_id':r[6]})
                 loan.update({'agreement_id':r[7]})
@@ -173,7 +177,7 @@ def main():
             try:
                 loan['branch_id'] = cfg['target'][who]['BRANCH'][loan['branch_id']]
             except:
-                loan['branch_id'] = cfg['target'][who]['BRANCH']['DEFAULT']
+                loan['branch_id'] = cfg['target'][who]['BRANCH'][portf]
             if not ((loan['agreement_number'] + ',' + loan['role']) in xloans):
                 xloans.append(loan['agreement_number'] + ',' + loan['role'])
             if not ((str(loan['customer_id']) + ',' + loan['currency_id'] + ',' + loan['branch_id']) in xtrans):

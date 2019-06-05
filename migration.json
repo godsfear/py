@@ -132,9 +132,9 @@
 		"DEFAULT": {
 			"ACCT_TYPE": "INTERNAL_CLIENT",
 			"BRANCH": {
-				"0200": "0200",
-				"39": "0200",
-				"DEFAULT": "0300"
+				"BTA": "0200",
+				"TSESNA": "0300",
+				"ASTANA": "0400"
 			},
 			"DEFAULT": {
 				"product_id": "MigrLoan_annuity"
@@ -152,9 +152,9 @@
 		"SECURITY": {
 			"ACCT_TYPE": "INTERNAL_CLIENT",
 			"BRANCH": {
-				"0200": "0200",
-				"39": "0200",
-				"DEFAULT": "0400"
+				"BTA": "0200",
+				"TSESNA": "0300",
+				"ASTANA": "0400"
 			},
 			"DEFAULT": {
 				"product_id": "MigrLoan_annuity"
@@ -205,9 +205,9 @@
 		"ФПК": {
 			"ACCT_TYPE": "INTERNAL_CLIENT",
 			"BRANCH": {
-				"0200": "0200",
-				"39": "0200",
-				"DEFAULT": "0300"
+				"BTA": "0200",
+				"TSESNA": "0300",
+				"ASTANA": "0400"
 			},
 			"DEFAULT": {
 				"product_id": "MigrLoan_annuity"
@@ -225,9 +225,9 @@
 		"ФПК_ПРОД": {
 			"ACCT_TYPE": "INTERNAL_CLIENT",
 			"BRANCH": {
-				"0200": "0200",
-				"39": "0200",
-				"DEFAULT": "0300"
+				"BTA": "0200",
+				"TSESNA": "0300",
+				"ASTANA": "0400"
 			},
 			"DEFAULT": {
 				"product_id": "MigrLoan_annuity"
@@ -254,7 +254,8 @@
 					"PRNCPL_OVRD": "1424",
 					"FEE_ACR": "1818",
 					"FEE_OVRD": "1838",
-					"PNLT_FEE_OVRD": "1879"
+					"PNLT_FEE_OVRD": "1879",
+					"PNLT_MISC": "1879"
 				},
 				"КРАТКОСРОЧНЫЙ": {
 					"INTRST": "1740",
@@ -264,7 +265,8 @@
 					"PRNCPL_OVRD": "1424",
 					"FEE_ACR": "1818",
 					"FEE_OVRD": "1838",
-					"PNLT_FEE_OVRD": "1879"
+					"PNLT_FEE_OVRD": "1879",
+					"PNLT_MISC": "1879"
 				}
 			},
 			"ТРАНЗ": "2860"

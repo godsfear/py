@@ -633,6 +633,8 @@ def ost2graf(conn,number,role,commit):
         'PNLT_PRNCPL_OVRD': 'PENALTY_FOR_DEBT',
         'PNLT_INTRST_OVRD': 'PENALTY_FOR_REWARD'
     }
+    if role not in role2pay.keys():
+        return
     qry = "SELECT lon.id,ost.balance,rep.id,TO_DATE(ext.value,'dd.mm.YYYY') FROM loans.loan_agreement AS lon JOIN common.agreement AS agr ON agr.id = lon.agreement_id AND agreement_number = '" + number + "' JOIN accounts.subaccount AS sub ON sub.agreement_id = agr.id AND sub.subaccount_type_id = (SELECT id FROM accounts.subaccount_type WHERE code = '" + role + "') JOIN accounts.subaccount_turnover AS ost ON ost.subaccount_id = sub.id JOIN loans.loan_repayment_schedule AS rep ON rep.loan_agreement_id = lon.id JOIN common.agreement_extended_field_values AS ext ON ext.agreement_id = agr.id AND ext.agreement_ext_field_id = (SELECT id FROM common.agreement_extended_fields WHERE code = 'MIGRATION_DATE')"
     cur = query(conn,qry)
     tab = cur.fetchall()

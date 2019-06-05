@@ -15,15 +15,16 @@ def plandate(elem):
 def main():
     test = False
     line = False
-    fname_loan = 'ast_loan_2.csv'
-    fname_plan = 'ast_graf_2.csv'
+    fname_loan = 'cesna_loan2.csv'
+    fname_plan = 'cesna_plan2.csv'
     who = 'SECURITY'
-    portf = 'ASTANA'
+    portf = 'TSESNA'
     cfg = config('migration.json')
     conn = connect(cfg[who])
     
     codes_loan = {
-        'id':'EXT_ID',
+        'c_sid':'EXT_ID',
+        'p_sid':'EXT_CODE',
         'nom':'agreement_number',
         'number':'agreement_number',
         'opn':'date_start',
@@ -40,8 +41,8 @@ def main():
         'base':'accrual_basis_id',
         'ann':'repayment_schedule_type_id',
         '_loan_id':'EXT_ID',
-        'inn':'_CLIENT_EXT_ID',
-        'cust_id':'_CLIENT_EXT_ID',
+        'inn':'EXT_CODE',
+        'cust_id':'EXT_CODE',
         'line_id':'_LINE',
         '_type':'product_id',
         '_number':'agreement_number', 
@@ -68,8 +69,7 @@ def main():
         'int_date':'repayment_interest_date'
     }
     codes_plan = {
-        'id':'EXT_ID',
-        'loan':'EXT_ID',
+        'loan':'agreement_number',
         'C_SID':'EXT_ID',
         'DATE_REPAYMENT':'target_date',
         'PRINCIPAL_AMOUNT':'amount_od',
@@ -132,7 +132,7 @@ def main():
         try:
             loan['branch_id'] = cfg['target'][who]['BRANCH'][loan['branch_id'].replace(' ','')]
         except:
-            loan.update({'branch_id':cfg['target'][who]['BRANCH']['DEFAULT']})
+            loan.update({'branch_id':cfg['target'][who]['BRANCH'][portf]})
         if 'EXT_ID' not in loan.keys():
             loan.update({'EXT_ID':loan['agreement_number']})
         try:
@@ -146,17 +146,17 @@ def main():
         if len(tab) != 0:
             continue
         if portf != '':
-            cust = "SELECT ext.customer_id FROM customers.customer_extended_field_values AS ext JOIN customers.cust_ext_field_rows AS rws ON rws.id = ext.row_id JOIN common.extended_field_group AS grp ON grp.id = rws.cust_ext_field_group_id AND grp.group_type = 'CUSTOMERS' AND grp.code = 'PORTFOLIO' JOIN customers.customer_extended_fields AS fld ON fld.code = 'PORTFOLIO_CODE' AND fld.ext_field_group_id = grp.id JOIN customers.customer_extended_field_values AS prf ON prf.cust_ext_field_id = fld.id AND prf.row_id = ext.row_id AND prf.value = '" + portf + "' WHERE ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'EXT_CODE') AND ext.value = '" + loan['_CLIENT_EXT_ID'] + "';"
+            cust = "SELECT ext.customer_id FROM customers.customer_extended_field_values AS ext JOIN customers.cust_ext_field_rows AS rws ON rws.id = ext.row_id JOIN common.extended_field_group AS grp ON grp.id = rws.cust_ext_field_group_id AND grp.group_type = 'CUSTOMERS' AND grp.code = 'PORTFOLIO' JOIN customers.customer_extended_fields AS fld ON fld.code = 'PORTFOLIO_CODE' AND fld.ext_field_group_id = grp.id JOIN customers.customer_extended_field_values AS prf ON prf.cust_ext_field_id = fld.id AND prf.row_id = ext.row_id AND prf.value = '" + portf + "' WHERE ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'EXT_CODE') AND ext.value = '" + loan['EXT_CODE'] + "';"
         else:
-            cust = "SELECT customer_id FROM customers.customer_extended_field_values AS ext WHERE ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'EXT_ID' AND ext.value = '" + loan['_CLIENT_EXT_ID'] + "';"
+            cust = "SELECT customer_id FROM customers.customer_extended_field_values AS ext WHERE ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'EXT_CODE' AND ext.value = '" + loan['EXT_CODE'] + "';"
         cur = query(conn,cust)
         tab = cur.fetchall()
         if len(tab) == 0:
-            cust = "SELECT ext.customer_id FROM customers.customer AS cus JOIN customers.customer_extended_field_values AS ext ON ext.customer_id = cus.id AND ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'IDN') AND ext.value = '" + loan['_CLIENT_EXT_ID'] + "'"
+            cust = "SELECT ext.customer_id FROM customers.customer AS cus JOIN customers.customer_extended_field_values AS ext ON ext.customer_id = cus.id AND ext.cust_ext_field_id = (SELECT id FROM customers.customer_extended_fields WHERE code = 'IDN') AND ext.value = '" + loan['EXT_CODE'] + "'"
             cur = query(conn,cust)
             tab = cur.fetchall()
             if len(tab) == 0:
-                print('Клиент "' + loan['_CLIENT_EXT_ID'] + '" не найден!')
+                print('Клиент "' + loan['EXT_CODE'] + '" не найден!')
                 return
         for r in (tab):
             loan.update({'customer_id':r[0]})
@@ -168,6 +168,10 @@ def main():
             loan['interest_repayment_freq_id'] = rep_period[loan['interest_repayment_freq_id']]
         except:
             pass
+        if 'interest_repayment_freq_id' not in loan.keys() and 'maindebt_repayment_freq_id' not in loan.keys():
+            loan['maindebt_repayment_freq_id'] = 'ARBITRARY'
+            loan['interest_repayment_freq_id'] = 'ARBITRARY'
+
         if loan['interest_repayment_freq_id'] == 'ARBITRARY':
             loan['repayment_schedule_type_id'] = 'DIFFERENTIAL'
             loan['accrual_method_id'] = 'FIXED_METHOD'
@@ -211,7 +215,7 @@ def main():
         try:
             loan['branch_id'] = cfg['target'][who]['BRANCH'][loan['branch_id'].replace(' ','')]
         except:
-            loan.update({'branch_id':cfg['target'][who]['BRANCH']['DEFAULT']})
+            loan.update({'branch_id':cfg['target'][who]['BRANCH'][portf]})
         try:
             loan['product_id'] = product[loan['product_id']]
         except:
@@ -261,7 +265,7 @@ def main():
         repintday = 0
         reppriday = 0
         for _pl in plans:
-            if _pl['EXT_ID'] != loan['EXT_ID']:
+            if not ((_pl.get('EXT_ID') == loan.get('EXT_ID')) or (_pl.get('agreement_number') == loan.get('agreement_number'))):
                 continue
             if 'pay_code' in _pl.keys():
                 _pl['pay_code'] = pay_code[_pl['pay_code']]

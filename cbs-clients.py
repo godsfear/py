@@ -9,11 +9,11 @@ from xfuncs import *
 
 def main():
     test = False
-    fname_cli = 'ast_cli_2.csv'
+    fname_cli = '8_Клиент_ЮЛ1.csv'
     fname_doc = ''
     fname_dop = ''
     who = 'SECURITY'
-    portf = 'ASTANA'
+    portf = 'TSESNA'
 
     cfg = config('migration.json')
     conn = connect(cfg[who])
@@ -122,7 +122,7 @@ def main():
         if 'branchCode' in cli.keys():
             cli['branchCode'] = cfg['target'][who]['BRANCH'][cli['branchCode']]
         else:
-            cli['branchCode'] = cfg['target'][who]['BRANCH']['DEFAULT']
+            cli['branchCode'] = cfg['target'][who]['BRANCH'][portf]
         if 'J_NAME' in cli.keys() and not ('J_SHORT_NAME' in cli.keys()):
             cli.update({'J_SHORT_NAME':cli['J_NAME']})
         if not ('RESIDENT' in cli.keys()):

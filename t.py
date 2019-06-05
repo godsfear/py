@@ -105,5 +105,10 @@ def main():
 
     conn.commit()"""
     
+    """import subprocess,os
+    rez = subprocess.Popen(["pg_dump","-s","-F","p","-h","172.16.137.3","-U","db_core","-d","executor","-f","fffffff.sql"],stdout = subprocess.PIPE,universal_newlines = True,env = dict(os.environ,PGPASSWORD="df464DFL360aleKKfw3516KJ3KL"))
+    for line in rez.stdout:
+        sys.stdout.write(line)"""
+
 if __name__ == '__main__':
     main()
