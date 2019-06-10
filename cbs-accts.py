@@ -2,16 +2,13 @@
 
 from xfuncs import *
 from cbs import *
-install('requests')
 import requests
 import csv
-install('progressbar')
 import progressbar
-install('lxml')
 from lxml import etree
 
 def main():
-    test = False
+    test = True
     fname = 'cesna_loan2.csv'
     who = 'SECURITY'
     portf = 'TSESNA'
@@ -109,12 +106,22 @@ def main():
         "FEE_ACR": "FEE_ACR",
         "FEE_OVRD": "FEE_OVRD",
         "PNLT_FEE_OVRD": "PNLT_FEE_OVRD",
-        "PNLT_MISC": "PNLT_MISC"
+        "PNLT_MISC": "PNLT_MISC",
+        "Кредит": "PRNCPL",
+        "КредПр": "PRNCPL_OVRD",
+        "КредТ": "INTRST",
+        "КредПр%": "INTRST_OVRD",
+        "Штраф": "PNLT_PRNCPL_OVRD",
+        "DEBT_DUE": "DEBT_DUE"
     }
 
     codes = {
+        'id':'EXT_ID',
         'nom':'agreement_number',
-        'pen_z':'amount',
+        'deb_kzt':'amount',
+        'type':'role',
+        'cur':'currency_id',
+        'amount':'amount'
     }
 
     dates = ['mdate']
@@ -134,7 +141,16 @@ def main():
             bar.update(k)
             k += 1
             if 'role' not in loan.keys():
-                loan.update({'role':'PNLT_MISC'})
+                loan.update({'role':'DEBT_DUE'})
+            if 'agreement_number' not in loan.keys():
+                qry = "SELECT agr.agreement_number FROM common.agreement AS agr JOIN common.agreement_extended_field_values AS ext ON ext.agreement_id = agr.id AND ext.agreement_ext_field_id = (SELECT id FROM common.agreement_extended_fields WHERE code = 'EXT_ID') AND value = '" + loan['EXT_ID'] + "'"
+                cur = query(conn,qry)
+                tab = cur.fetchall()
+                if len(tab) == 0:
+                    print('Не определен идентификатор договора!',loan['EXT_ID'])
+                    return
+                for r in tab:
+                    loan.update({'agreement_number':r[0]})
             try:
                 loan['role'] = ('' if loan['role'] == '' else roles[loan['role']])
             except:

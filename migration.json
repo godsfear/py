@@ -111,6 +111,11 @@
 			"pay_type": "OVERDUE_COMMISSION",
 			"role": "FEE_OVRD"
 		},
+		"1860": {
+			"description": "Дебиторская задолженность",
+			"pay_type": "MISC_DEBT_DUE",
+			"role": "DEBT_DUE"
+		},
 		"201021": {
 			"description": "Срочный ОД",
 			"pay_type": "DEBT",
@@ -255,7 +260,8 @@
 					"FEE_ACR": "1818",
 					"FEE_OVRD": "1838",
 					"PNLT_FEE_OVRD": "1879",
-					"PNLT_MISC": "1879"
+					"PNLT_MISC": "1879",
+					"DEBT_DUE": "1860"
 				},
 				"КРАТКОСРОЧНЫЙ": {
 					"INTRST": "1740",
@@ -266,7 +272,8 @@
 					"FEE_ACR": "1818",
 					"FEE_OVRD": "1838",
 					"PNLT_FEE_OVRD": "1879",
-					"PNLT_MISC": "1879"
+					"PNLT_MISC": "1879",
+					"DEBT_DUE": "1860"
 				}
 			},
 			"ТРАНЗ": "2860"

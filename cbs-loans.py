@@ -15,14 +15,15 @@ def plandate(elem):
 def main():
     test = False
     line = False
-    fname_loan = 'cesna_loan2.csv'
-    fname_plan = 'cesna_plan2.csv'
+    fname_loan = 'ast_loan_2.csv'
+    fname_plan = 'ast_graf_2.csv'
     who = 'SECURITY'
-    portf = 'TSESNA'
+    portf = 'ASTANA'
     cfg = config('migration.json')
     conn = connect(cfg[who])
     
     codes_loan = {
+        'id':'EXT_ID',
         'c_sid':'EXT_ID',
         'p_sid':'EXT_CODE',
         'nom':'agreement_number',
@@ -32,7 +33,7 @@ def main():
         'cur':'currency_id',
         'rate':'BASE`REWARD',
         'rate_p':'PENALTY`PENALTY_FOR_DEBT',
-        'reate_pod':'PENALTY`PENALTY_FOR_DEBT',
+        'rate_pod':'PENALTY`PENALTY_FOR_DEBT',
         'rate_ppr':'PENALTY`PENALTY_FOR_REWARD',
         'amount':'amount',
         'sum':'amount',
@@ -70,6 +71,7 @@ def main():
     }
     codes_plan = {
         'loan':'agreement_number',
+        'id':'EXT_ID',
         'C_SID':'EXT_ID',
         'DATE_REPAYMENT':'target_date',
         'PRINCIPAL_AMOUNT':'amount_od',
