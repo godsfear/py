@@ -35,7 +35,8 @@ def get_bucket():
 def delete_bucket(bucket):
     print(f'Deleting bucket:{bucket}')
     s3 = boto3.client('s3')
-    s3.delete_bucket_website(Bucket=bucket)
+    rez = s3.delete_bucket(Bucket=bucket)
+    print(rez)
 
 def delete_from_bucket(bucket,file):
     print(f'Deleting from bucket:{bucket} file:{file}')
@@ -119,7 +120,9 @@ def del_collection(collectionId):
     print('Done...')
 
 def main():
-    #create_bucket(str(uuid.uuid5(uuid.NAMESPACE_DNS,'dar.kz')))
+    """bucket = str(uuid.uuid4())
+    print(bucket)
+    create_bucket(bucket)"""
     #upload_to_bucket('aws/IMG_20190620_130309.jpg',get_bucket()[0],'IMG_20190620_130309.jpg')
     #list_bucket('94c4c3e7-a5fe-5c70-b9c1-b94ad628fe2b')
     #index_photo(get_bucket()[0],'IMG_20190511_031230.jpg',get_collections()[0])
@@ -129,12 +132,19 @@ def main():
     #list_faces(get_collections()[0])
     #del_collection(get_collections()[0])
     #create_collection('test_collection_1')
-    #list_buckets()
+    list_buckets()
     """sqs = boto3.client('sqs')
     sqsResponse = sqs.receive_message(QueueUrl = 'https://sqs.us-east-1.amazonaws.com/414814015346/rekognition_video',MessageAttributeNames = ['ALL'],MaxNumberOfMessages = 10)
     for message in sqsResponse['Messages']:
         print(message['Body'])
     sqs.delete_message(QueueUrl='https://sqs.us-east-1.amazonaws.com/414814015346/rekognition_video',ReceiptHandle=message['ReceiptHandle'])"""
+    """session = boto3.Session()
+    credentials = session.get_credentials()
+    current_credentials = credentials.get_frozen_credentials()
+    accessKey = current_credentials.access_key
+    secretKey = current_credentials.secret_key
+    print(accessKey,secretKey)"""
+    #delete_bucket('61e0d872-007d-4d3e-9a07-22f18b8dedee-temp-bucket')
 
 if __name__ == '__main__':
     main()

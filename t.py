@@ -14,9 +14,9 @@ from openpyxl import load_workbook
 import xlrd
 
 def main():
-    who = 'SECURITY'
+    """who = 'SECURITY'
     cfg = config('migration.json')
-    conn = connect(cfg[who])
+    conn = connect(cfg[who])"""
     """r = '829e2c4d54674cb511e7e1670843bcda'
     z = '-'.join([r[24:],r[20:24],r[16:20],r[0:4],r[4:16]])
     print(z)"""

@@ -1,2 +1,0 @@
-﻿"_loan_id","_client_id","cln_name","_number","currency","migr_date","_filial","_effect","rate","open_date","end_date","_srok","summa","_product","_peni","interest_repayment_freq_id","maindebt_repayment_freq_id","p_date","bank_year","kol_d","fact"
-"9440466107","6833518521","KAZCONCRETE ТОО","0401/07/800/29","KZT","2017-10-19",39,"","19","2007-11-30 00:00:00","2010-12-30 00:00:00","","40827925.4","FIN_LEASING","0.5","MONTHLY","ARBITRARY","2007-11-30","1","365","FACT_360"
