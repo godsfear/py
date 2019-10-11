@@ -5,13 +5,13 @@ response = kinesis.create_stream(StreamName='Test_Data_Stream_1')
 data_arn = kinesis.describe_stream(StreamName='Test_Data_Stream_1')['StreamDescription']['StreamARN']
 #response = kinesis.delete_stream(StreamName='Test_Data_Stream_1')
 """
-"""
+
 kinesisvideo = boto3.client('kinesisvideo')
-video_arn = kinesisvideo.create_stream(StreamName='Test_Video_Stream_1')['StreamARN']
+#video_arn = kinesisvideo.create_stream(StreamName='Test_Video_Stream_1')['StreamARN']
 #response = kinesisvideo.generate_presigned_url(ClientMethod,Params=None,ExpiresIn=3600,HttpMethod=None)
 #response = kinesisvideo.get_data_endpoint(StreamARN=video_arn,APIName='PUT_MEDIA')
 print(response)
-kinesisvideo.delete_stream(StreamARN=video_arn)"""
+kinesisvideo.delete_stream(StreamARN=video_arn)
 
 """
 for s in kinesisvideo.list_streams()['StreamInfoList']:
